@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<!--        Scripts-->
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<script type="text/javascript" src="/home/conor/Programming/WebDev/MusicMeetUp/JS/sidenavbar.js"></script>
+        <script type="text/javascript" src="/home/conor/Programming/WebDev/MusicMeetUp/JS/noteObtain.js"></script>
+        <script type="text/javascript" src="/home/conor/Programming/WebDev/MusicMeetUp/JS/jq_notes.js"></script>
+<!--        Stylesheets-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
+        <link href='https://fonts.googleapis.com/css?family=Kameron' rel='stylesheet'>
+       
+        <link rel="stylesheet" type="text/css" href="style_home.css">
+        <link rel="stylesheet" type="text/css" href="style_fretboard.css">
+		<title>Music MeetUp</title>
+	</head>
+	<body>
+        
+        <h1>Guitar Theory Emulator<a href ="https://www.umass.edu"><img src="/home/conor/Pictures/Wallpapers/UMass_Athletics_wordmark.svg.png"></a></h1>
+
+        
+        <!--<div class="container">-->
+            <!--<span id="spanOption" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Options </span>            -->
+            <!--<a href="musicMeetUP.html">Home</a>-->
+            <!--<a href="#news">About</a>-->
+            <!--<div class="dropdown">-->
+                <!--<button class="dropbtn">Schools</button>-->
+                <!--<div class="dropdown-content">-->
+                    <!--<a href="#">UMass Amherst</a>-->
+                    <!--<a href="#">Hampshire College</a>-->
+                    <!--<a href="#">Amherst College</a>-->
+                <!--</div>-->
+            <!--</div> -->
+            <!--<div class="dropdown">-->
+                <!--<button class="dropbtn">Quick Messages</button>-->
+                <!--<div class="dropdown-content">-->
+                    <!--<a href="#">Jake</a>-->
+                    <!--<a href="#">Jack</a>-->
+                    <!--<a href="#">Jane</a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="dropdown">-->
+                <!--<button class="dropbtn">Music Tools</button>-->
+                <!--<div class="dropdown-content">-->
+                    <!--<a href="#">Fretboard</a>-->
+                    <!--<a href="#">Piano</a>-->
+                    <!--<a href="#">Bass</a>-->
+                <!--</div>-->
+            <!--</div> -->
+        <!--</div>-->
+
+        <!---->
+        <!--<div id="main">-->
+            <!--<aside id="login" style="float:right">-->
+                <!--<label for="loginForm" style="color:black;font-size:28px">Login<br><br></label>-->
+                <!--<form action="" onsubmit="login()" id="loginForm" style="font-family:Lato;font-size:20px;">-->
+                    <!--<label for="Username" style="text-align:center">Username</label>-->
+                    <!--<input type="text" name="Username">-->
+                    <!--<br>-->
+                    <!--<label for="Password" style="text-align:center">Password</label>-->
+                    <!--<input type="password" name="Password">-->
+                    <!--<br>-->
+                    <!--<input id="loginSubmit" type="submit" value="Login">-->
+                <!--</form>-->
+            <!--</aside>-->
+            
+<!--            article to display fretboard and options-->
+            <article id="chordSetUp">
+                    <label for="notes" style="font-size:20px">Select a root note:</label>
+                    <select name="notes" id="notes">
+                        <option value="A">A</option>
+                        <option value="A#">A#</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="C#">C#</option>
+                        <option value="D">D</option>
+                        <option value="D#">D#</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="F#">F#</option>
+                        <option value="G">G</option>
+                        <option value="G#">G#</option>
+                    </select>
+                    <label for="modes" style="font-size:20px">Select a mode:</label>
+                    <select name="modes" id="modes">
+                        <option value="MAJOR">Major</option>
+                        <option value="DORIAN">Dorian</option>
+                        <option value="PHRYGIAN">Phrygian</option>
+                        <option value="LYDIAN">Lydian</option>
+                        <option value="MIXOLYDIAN">Mixolydian</option>
+                        <option value="MINOR">Minor</option>
+                        <option value="LOCRIAN">Locrian</option>
+                        <option value="MAJOR-PENT">Maj. Pentatonic</option>
+                        <option value="MINOR-PENT">Min. Pentatonic</option>
+                        <option value="MAJ-MIN-PENT">Major & Minor Pent</option>
+                        
+                       
+                    </select>
+                <input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;
+                <input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>
+                <button id="modeAndNoteSubmit">Generate Fretboard!</button>
+                <button id="clearBoard">Clear Board</button> <br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                
+                
+               
+            </article>
+        </div>
+        
+        <div class="container">
+        <!--        Chord names and notes on the left of page-->
+            <h2></h2>
+            <p id="scalePara"></p>
+            <div id="chord-listings">
+
+                <ul id="chordsInScale" class="connectedSortable">
+                </ul>
+                
+            </div>    
+            <div id="chords-progression">
+                <ul id="currentProgression" class="connectedSortable">
+<!--                    <li>Drop Chords Here</li>-->
+                </ul>
+            </div>
+
+     
+            <div class="guitar-neck">
+
+                
+                <div class="fret first"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+                <div class="fret"></div>
+
+                <ul class="dots">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ul class="strings">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+                <ul class="open-notes">
+                    <li class="E">E</li>
+                    <li class="B">B</li>
+                    <li class="G">G</li>
+                    <li class="D">D</li>
+                    <li class="A">A</li>
+                    <li class="E">E</li>
+                </ul>
+                <div class="notes" id="masks">  
+                    <div class="mask low-e">
+                        <ul id='lowestring'>
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class='A'>A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>
+                            <li class="E">E</li>
+                        </ul>
+                    </div>
+                    <div class="mask a">
+                        <ul id='astring'>
+                            <li class="A">A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class="A">A</li>
+
+                        </ul>
+                    </div>
+                    <div class="mask d">
+                        <ul id='dstring'>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class="A">A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                        </ul>
+                    </div>
+                    <div class="mask g">
+                        <ul id='gstring'>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class="A">A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>  
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+
+                        </ul>
+                    </div>
+                    <div class="mask b">
+                        <ul id='bstring'>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>   
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class="A">A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li></ul>
+                    </div>
+                    <div class="mask high-e">
+                        <ul id='highestring'>
+                            <li class="E">E</li>
+                            <li class="F">F</li>
+                            <li class="Fsharp">F#</li>
+                            <li class="G">G</li>
+                            <li class="Gsharp">G#</li>
+                            <li class='A'>A</li>
+                            <li class="Asharp">A#</li>
+                            <li class="B">B</li>
+                            <li class="C">C</li>
+                            <li class="Csharp">C#</li>
+                            <li class="D">D</li>
+                            <li class="Dsharp">D#</li>
+                            <li class="E">E</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>
+
+
