@@ -156,12 +156,10 @@ function chordsList(initial_scale, mode){
                 var formatted_name = curr_scale[0]+" "+chord_name_toString(chord_functions_array[i]);
                 finalList[formatted_name]=tempChord;
                 index_list[added++]=formatted_name;
-//                alert(finalList[0]);
             }
         }
     }
-    alert("test"+JSON.stringify(index_list));
-    alert(added+'\n'+finalList.toSource());
+
 
     return finalList;
 }
@@ -170,8 +168,8 @@ function chordsList(initial_scale, mode){
 function chord_name_toString(chord){
     chord = chord.replace(/_/g, " ");
     chord = chord.replace(/chord/g, "");
-    chord = chord.replace(/min/g, "Minor");
-    chord = chord.replace(/maj/g, "Major");    
+    chord = chord.replace(/min/g, " Minor");
+    chord = chord.replace(/maj/g, " Major");
     return chord;
 }
 
