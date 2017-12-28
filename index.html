@@ -5,22 +5,40 @@
 <!--        Scripts-->
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- bootstrap cdns -->
+                
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
         <script type="text/javascript" src="noteObtain.js"></script>
         <script type="text/javascript" src="jq_note_display.js"></script>
 <!--        Stylesheets-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
         <link href='https://fonts.googleapis.com/css?family=Kameron' rel='stylesheet'>
-       
+        -->
         <link rel="stylesheet" type="text/css" href="style_home.css">
         <link rel="stylesheet" type="text/css" href="style_fretboard.css">
 
 		<title>Music MeetUp</title>
 	</head>
 	<body>
-        
-        <h1>Guitar Theory Emulator<a href ="https://www.umass.edu"><img src="/home/conor/Pictures/Wallpapers/UMass_Athletics_wordmark.svg.png"></a></h1>
 
+    <!-- <div class="jumbotron text-left"> -->
+            <div class='row'>
+                <div class="col-sm-6 col-sm-offset-4">
+                    <h1>Fretboard Visualization</h1>
+                </div>
+            </div>
+    <!-- </div> -->
+        
+        
         
         <!--<div class="container">-->
             <!--<span id="spanOption" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Options </span>            -->
@@ -68,9 +86,13 @@
             <!--</aside>-->
             
 <!--            article to display fretboard and options-->
+
+        <div class="row">
             <article id="chordSetUp">
-                    <label for="notes" style="font-size:20px">Select a root note:</label>
-                    <select name="notes" id="notes">
+
+                <div class="form-group col-sm-2 col-sm-offset-3">
+                    <label for="notes" style="font-size:20px">Select a root note:<span class"glyphicon glyphicon-music"></span></label>
+                    <select class="form-control" name="notes" id="notes">
                         <option value="A">A</option>
                         <option value="A#">A#</option>
                         <option value="B">B</option>
@@ -84,49 +106,53 @@
                         <option value="G">G</option>
                         <option value="G#">G#</option>
                     </select>
-                    <label for="modes" style="font-size:20px">Select a mode:</label>
-                    <select name="modes" id="modes">
-                        <option value="MAJOR">Major</option>
-                        <option value="DORIAN">Dorian</option>
-                        <option value="PHRYGIAN">Phrygian</option>
-                        <option value="LYDIAN">Lydian</option>
-                        <option value="MIXOLYDIAN">Mixolydian</option>
-                        <option value="MINOR">Minor</option>
-                        <option value="LOCRIAN">Locrian</option>
-                        <option value="MAJOR-PENT">Maj. Pentatonic</option>
-                        <option value="MINOR-PENT">Min. Pentatonic</option>
-                        <option value="MAJ-MIN-PENT">Major & Minor Pent</option>
+                </div>
+
+                <div class="form-group col-sm-2">
+                        <label for="modes" style="font-size:20px">Select a mode:</label>
+                        <select class="form-control" name="modes" id="modes">
+                            <option value="MAJOR">Major</option>
+                            <option value="DORIAN">Dorian</option>
+                            <option value="PHRYGIAN">Phrygian</option>
+                            <option value="LYDIAN">Lydian</option>
+                            <option value="MIXOLYDIAN">Mixolydian</option>
+                            <option value="MINOR">Minor</option>
+                            <option value="LOCRIAN">Locrian</option>
+                            <option value="MAJOR-PENT">Maj. Pentatonic</option>
+                            <option value="MINOR-PENT">Min. Pentatonic</option>
+                            <option value="MAJ-MIN-PENT">Major & Minor Pent</option>                           
+                        </select>
+                </div>
+                
+            <!--<input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;-->
+            <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
+            <div class="col-sm-1">
+                <label for="modeAndNoteSubmit">Generate Fretboard!</label>
                         
-                       
-                    </select>
-                <!--<input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;-->
-                <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
-                <button id="modeAndNoteSubmit">Generate Fretboard!</button>
-                <button id="clearBoard">Clear Board</button> <br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                
-                
-               
-            </article>
+                <button type="button" class="btn btn-success"  id="modeAndNoteSubmit">
+                    <span class="glyphicon glyphicon-music"></span> Go!
+                </button>            
+                    <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
+            </div>               
+            <div class="col-sm-1">
+                    <label for="modeAndNoteSubmit">Clear Fretboard!</label>
+                            
+                    <button type="button" class="btn btn-warning"  id="clearBoard">
+                        <span class="glyphicon glyphicon-refresh"></span> Go!
+                    </button>            
+                        <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
+                </div>        
+           
+        </article>
         </div>
+
+            
+        <h2></h2>
+        <p id="scalePara"></p>
         
-        <div class="container">
+        <div class="row">
         <!--        Chord names and notes on the left of page-->
-            <h2></h2>
-            <p id="scalePara"></p>
-            <div id="chord-listings">
-
-                <ul id="chordsInScale" class="connectedSortable">
-                </ul>
-                
-            </div>    
-            <div id="chords-progression">
-                <ul id="currentProgression" class="connectedSortable">
-<!--                    <li>Drop Chords Here</li>-->
-                </ul>
-            </div>
-
-     
+            
             <div class="guitar-neck">
 
                 
@@ -275,7 +301,20 @@
             </div>
         </div>
 
+        
+        <div id="chord-listings">
 
+            <ul id="chordsInScale" class="connectedSortable">
+            </ul>
+            
+        </div>    
+        <div id="chords-progression">
+            <ul id="currentProgression" class="connectedSortable">
+<!--                    <li>Drop Chords Here</li>-->
+            </ul>
+        </div>
+
+        
 </body>
 </html>
 

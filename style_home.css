@@ -1,6 +1,6 @@
 html{
     min-height: 100%;
-    background: linear-gradient(to bottom,#9D002C 0, #f1f1f1 24em);
+    background: linear-gradient(to bottom,#9D002C 0%, #f1f1f1 100%);
 }
 body {
     min-height: 100%;
@@ -8,16 +8,15 @@ body {
     transition: background-color .5s;
     background-color:transparent;
 }
+.jumbotron{
+    transition: background-color .5s;
+}
+
 h1{
     text-align: left;
     font-family: 'Kameron';
     font-size: 48px;
 }
-h1 img{
-    float: right;
-    padding-right: 24px;
-}
-
 .sidenav {
     height: 100%;
     width: 0;
@@ -215,13 +214,3 @@ h2 {
     background: linear-gradient(to right, rgba(0,0,0,0) 0%, black 50%, rgba(0,0,0,0)100% );
     text-shadow: 0 0 8px 0;
 }
-
-
-
-
-
-
-
-
-
-

@@ -15,7 +15,7 @@ h3 {
 }
 .guitar-neck {
   display: inline-block;
-    float: right;
+    /* float: right; */
   position: relative;
   margin-top: 40px;
   margin-left: 15%;

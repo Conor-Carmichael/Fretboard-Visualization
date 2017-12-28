@@ -11,6 +11,9 @@ var pentMaj=[]
 var finalList={};
 var index_list={};
 
+
+//use memoization? just get the relative list of all notes and use c-> including notes not in chords then no need for a lot of calcs
+
 //gets pattern for a mode, bascially just rotates the array scale_pattern
 function modePattern(mode){
 	var return_list = new Array(7);
