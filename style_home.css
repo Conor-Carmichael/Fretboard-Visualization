@@ -1,8 +1,11 @@
 html{
+    height:100%;
+}
+body{
     min-height: 100%;
     background: linear-gradient(to bottom,#9D002C 0%, #f1f1f1 100%);
 }
-body {
+/* body .jumbotron{
     min-height: 100%;
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
@@ -10,59 +13,24 @@ body {
 }
 .jumbotron{
     transition: background-color .5s;
-}
+} */
 
 h1{
     text-align: left;
     font-family: 'Kameron';
     font-size: 48px;
 }
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgba(157,0,44,.85);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidenav p {
-    padding: 8px 8px 8px 16px;
-    font-size: 25px;
-    text-decoration: underline;
-    color: #FBFAFA;
-    display: block;
-    transition: 0.15s;
-}
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #FBFAFA;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover, .offcanvas a:focus{
-    color:#9D002C;
-    background-color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+#scale-details{
+    text-align: center;
+    width:100%;
+    font-size: 20px;
+    color:white;
+    /* background: linear-gradient(to right, rgba(0,0,0,0) 0%, black 50%, rgba(0,0,0,0)100% ); */
 }
 
 .container {
     overflow: hidden;
-    background-color: rgba(0,0,0,0);
+    /* background-color: rgba(0,0,0,0); */
     border-bottom: solid;
     border-bottom-color: white;
 }
@@ -185,32 +153,27 @@ h1{
 }
 
 #currentProgression li{
-        font-size: 16px;
+    font-size: 16px;
     list-style: none;
     padding:.5em 1em 0em 1em;
     background: black;
     color: #F9F7F2;
     border: solid 1px grey;
 }
-
-/*
-#chordsInScale li:hover{
-    
+.active{
+    background-color:#9D002C !important;
+    border-color:#9D002C !important;
 }
-*/
-h2 {
-    text-align: center;
-    width:100%;
-    font-size: 20px;
-    color:white;
-    background: linear-gradient(to right, rgba(0,0,0,0) 0%, black 50%, rgba(0,0,0,0)100% );
+.carousel-inner{
+    padding:2em;
+    padding-top: 1em;
 }
-#scalePara{
+.carousel-inner{
     text-align: center;
-    width:100%;
-    font-size: 20px;
-    color:white;
-    padding-left: .25em;
-    background: linear-gradient(to right, rgba(0,0,0,0) 0%, black 50%, rgba(0,0,0,0)100% );
-    text-shadow: 0 0 8px 0;
+}
+.carousel-control.right, .carousel-control.left {
+    background-image:none;
+}
+#carousel-row{
+    padding-top:0;
 }

@@ -1,6 +1,7 @@
 var color_counter=0;
 var bebop;
 var blues;
+var total_JSON;
 
 $(document).ready(function(){
     $( function() {
@@ -12,13 +13,18 @@ $(document).ready(function(){
 
     $('#modeAndNoteSubmit').click(function(){
         clearBoard();
-
         $('#currentProgression').append("<li>Drag&Drop to Build \nProgressions Here:</li>");
+        //get user input
         var root = $('#notes').val();
         var scale_mode = $('#modes').val();
-        var arr = scale_create(root,scale_mode);
-        addHeading(arr, root, scale_mode);
-        var objTemp = chordsList(arr,scale_mode);
+
+        alert(JSON.stringify(create_chord_JSON(root,scale_mode)));
+
+        //get chord and scale information as JSON
+        total_JSON = create_chord_JSON(root,scale_mode)
+        // var arr = scale_create(root,scale_mode);
+        addHeading(total_JSON.scale, root, scale_mode);
+        // var objTemp = chordsList(arr,scale_mode);
         
         appendKeys(objTemp);
         removeSharps(arr);
