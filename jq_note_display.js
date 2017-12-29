@@ -95,7 +95,10 @@ function clearBoard(){
     $('#gstring li').animate({opacity:0});
     $('#bstring li').animate({opacity:0});
     $('#highestring li').animate({opacity:0});
-    $('#chordsInScale').empty();
+    $('#basic-chords li:not(:first)').remove();
+    $('#inter-chords li:not(:first)').remove();
+    $('#jazz-chords li:not(:first)').remove();
+    
     $('#currentProgression').empty();
     $('h2').text("");
     $('#scalePara').text("");
