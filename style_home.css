@@ -1,9 +1,12 @@
 html{
-    height:100%;
-}
+    width:100%;
+    height:100%;}
 body{
-    min-height: 100%;
+    height: 100%;
+    margin: 0;
     background: linear-gradient(to bottom,#9D002C 0%, #f1f1f1 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 /* body .jumbotron{
     min-height: 100%;
@@ -176,4 +179,12 @@ h1{
 }
 #carousel-row{
     padding-top:0;
+}
+.list-inline{
+    padding-left:30px;
+}
+.list-inline-item{
+    font-style: oblique;
+    margin-right: 55px;
+    color:white; 
 }

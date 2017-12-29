@@ -8,6 +8,7 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   letter-spacing: 0.05em;
 }
+
 h3 {
   text-transform: uppercase;
   text-align: center;
@@ -117,21 +118,24 @@ h3 {
   overflow-x: hidden;
 }
 .guitar-neck .notes .mask {
-   position: absolute; 
-  right: -183px;
+  position: absolute; 
+  right: -165px;
   bottom: 0;
   width: 1184px;
+  overflow-y:hidden; 
+  
   height: 30px;
 }
 .guitar-neck .notes .mask ul {
   position: relative;
+  
   float: left;
 }
 .guitar-neck .notes .mask ul li {
   float: left;
   width: 30px;
   height: 30px;
-  margin-right: 50px;
+  margin-right: 47px;
   background: rgba(220, 183, 36,1);
   color: #fff;
   border-radius: 50%;

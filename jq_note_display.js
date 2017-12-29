@@ -100,7 +100,7 @@ function clearBoard(){
     $('#bstring li').animate({opacity:0});
     $('#highestring li').animate({opacity:0});
     $('#basic-chords li:not(:first)').remove();
-    $('#inter-chords li:not(:first)').remove();
+    $('#intermediate-chords li:not(:first)').remove();
     $('#jazz-chords li:not(:first)').remove();
     
     $('#currentProgression').empty();
@@ -115,15 +115,25 @@ function clearBoard(){
 
 
 function dehighlight(notes){
+    
     for(var i=0;i<notes.length;i++){
-        $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        if (i===1){
+            $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+            $('.'+notes[i]+'').css({'color':'white'});
+        }else{
+            $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        }    
     }
 }
 
 function highlight(notes){
     for(var i=0;i<notes.length;i++){
-        $('.'+notes[i]+'').css({'background':'#9D002C'});
-        
+        if (i===1){
+            $('.'+notes[i]+'').css({'background':'white'});
+            $('.'+notes[i]+'').css({'color':'black'});
+        }else{
+            $('.'+notes[i]+'').css({'background':'#9D002C'});
+        }    
     }
 }
 
