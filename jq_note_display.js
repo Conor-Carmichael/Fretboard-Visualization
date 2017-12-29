@@ -1,7 +1,7 @@
 var color_counter=0;
 var bebop;
 var blues;
-var total_JSON;
+var totalJSON;
 
 $(document).ready(function(){
     $( function() {
@@ -14,21 +14,17 @@ $(document).ready(function(){
     $('#modeAndNoteSubmit').click(function(){
         clearBoard();
         $('#currentProgression').append("<li>Drag&Drop to Build \nProgressions Here:</li>");
-        //get user input
         var root = $('#notes').val();
         var scale_mode = $('#modes').val();
+        totalJSON =  create_chord_JSON(root, scale_mode);
+        showChords();
 
-        alert(JSON.stringify(create_chord_JSON(root,scale_mode)));
-
-        //get chord and scale information as JSON
-        total_JSON = create_chord_JSON(root,scale_mode)
-        // var arr = scale_create(root,scale_mode);
-        addHeading(total_JSON.scale, root, scale_mode);
-        // var objTemp = chordsList(arr,scale_mode);
+        addHeading(totalJSON.scale, totalJSON.scale[0], scale_mode)
         
-        appendKeys(objTemp);
-        removeSharps(arr);
-        showNote(arr);
+        // appendKeys(objTemp);
+        var temp = totalJSON.scale;
+        removeSharps(temp);
+        showNote(temp);
         //create chord list, append to ul on left of screen, make draggable into  list for timings and progressions
         
     });
@@ -59,8 +55,22 @@ $(document).ready(function(){
     });    
 });// END DOC READY
 
- 
 
+function showChords(){
+    var n;
+    totalJSON.scale.forEach(function(note){
+        n=note.toString();
+        for (chord in totalJSON.basic[n]){
+            $("#basic-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.basic[note][chord]+"</li>")
+        }
+        for (chord in totalJSON.inter[n]){
+            $("#intermediate-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.inter[note][chord]+"</li>")
+        }
+        for (chord in totalJSON.jazz[n]){
+            $("#jazz-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.jazz[note][chord]+"</li>")
+        }
+    });    
+}
 
 function addHeading(scale, root, mode){
     $('h2').text(root+" "+mode+":");
