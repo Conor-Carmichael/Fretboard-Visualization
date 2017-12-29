@@ -29,13 +29,17 @@ $(document).ready(function(){
         
     });
 
-    $(document).on('mouseenter','.chordFromScale',function(){
-        var notes = $(this).attr('id').split(',');
+    $(document).on('mouseenter','.list-group-item',function(){
+        
+        var notes = $(this).text();
+        notes = notes.split(": ")[1].split(",");
+        
         removeSharps(notes);
         highlight(notes);
     });
-    $(document).on('mouseleave','.chordFromScale',function(){
-        var notes = $(this).attr('id').split(',');
+    $(document).on('mouseleave','.list-group-item',function(){
+        var notes = $(this).text();
+        notes = notes.split(": ")[1].split(",");
         removeSharps(notes);
         dehighlight(notes);
     });
