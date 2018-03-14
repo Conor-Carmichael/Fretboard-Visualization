@@ -8,8 +8,7 @@ $(document).ready(function(){
         $( "#chordsInScale, #currentProgression" ).sortable({
             connectWith: ".connectedSortable"
         }).disableSelection();
-    } );
-    
+    } );    
 
     $('#modeAndNoteSubmit').click(function(){
         clearBoard();
@@ -24,37 +23,20 @@ $(document).ready(function(){
         // appendKeys(objTemp);
         var temp = totalJSON.scale;
         removeSharps(temp);
-        showNote(temp);
-        //create chord list, append to ul on left of screen, make draggable into  list for timings and progressions
-        
+        showNote(temp);        
     });
 
-    $(document).on('mouseenter','.list-group-item',function(){
-        
-        var notes = $(this).text();
-        notes = notes.split(": ")[1].split(",");
-        
-        removeSharps(notes);
-        highlight(notes);
-    });
-    $(document).on('mouseleave','.list-group-item',function(){
+    //when clicking a chord, highlight it, dehighlight all first
+    $(document).on('click','.list-group-item',function(){
+        dehighlight();
         var notes = $(this).text();
         notes = notes.split(": ")[1].split(",");
         removeSharps(notes);
-        dehighlight(notes);
-    });
-    
-    $(document).on('mouseenter','.chordFromScale',function(){
-        var notes = $(this).attr('id').split(',');
-        removeSharps(notes);
         highlight(notes);
-    });
-    
-    
-    
-    
+    });   
     
     $("#clearBoard").click(function(){
+        dehighlight();
         clearBoard();
     });    
 });// END DOC READY
@@ -114,21 +96,21 @@ function clearBoard(){
 }
 
 
-function dehighlight(notes){
-    
-    for(var i=0;i<notes.length;i++){
+function dehighlight(){
+    removeSharps(notes_arr);
+    for(var i=0;i<notes_arr.length;i++){
         if (i===1){
-            $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
-            $('.'+notes[i]+'').css({'color':'white'});
+            $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+            $('.'+notes_arr[i]+'').css({'color':'white'});
         }else{
-            $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+            $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
         }    
     }
 }
 
 function highlight(notes){
     for(var i=0;i<notes.length;i++){
-        if (i===1){
+        if (i===0){
             $('.'+notes[i]+'').css({'background':'white'});
             $('.'+notes[i]+'').css({'color':'black'});
         }else{
@@ -157,26 +139,6 @@ function addSharps(arr_){
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function outputUpdate(bpm){
+    $("#bpmOutput").text(bpm);
+}

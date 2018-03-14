@@ -86,7 +86,7 @@
                 <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
         </div>               
         <div class="col-sm-1">
-                <label for="modeAndNoteSubmit">Clear Fretboard!</label>
+                <label for="modeAndNoteSubmit">Clear Notes on Fretboard!</label>
                         
                 <button type="button" class="btn btn-warning"  id="clearBoard">
                     <span class="glyphicon glyphicon-refresh"></span> Go!
@@ -97,176 +97,196 @@
     </article>
     </div>
     <div id="scale-details" class="row">
-        <div class="col-sm-2 col-sm-offset-5">
+        <div class="col-sm-2 col-sm-offset-3">
             <h2></h2>
             <p id="scalePara"></p>
         </div>
+        <div class="col-sm-1 col-sm-offset-1">
+            <span id="bpm-span">
+                <label id="bpm-label" for="set-bpm">Set BPM:<output for="set-bpm" id="bpmOutput"></output></label>
+                <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
+            <span>
+        </div>
         
+        <div class="col-sm-1">
+            <label>Metronome and Chords</label>
+            <button class="btn btn-warning"><span class="glyphicon glyphicon-play"></span>Start</button>
+        </div>
     </div>
-            
+    
        
 <!-- expand to see guitar html -->
-    <div class="row">        
-        <div class="guitar-neck">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-7">
+            <div class="guitar-neck">
 
             
-            <div class="fret first"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
-            <div class="fret"></div>
+                        <div class="fret first"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+                        <div class="fret"></div>
+            
+                        <ul class="dots">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <ul class="strings">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+            
+                        <ul class="open-notes">
+                            <li class="E">E</li>
+                            <li class="B">B</li>
+                            <li class="G">G</li>
+                            <li class="D">D</li>
+                            <li class="A">A</li>
+                            <li class="E">E</li>
+                        </ul>
+                        <div class="notes" id="masks">  
+                            <div class="mask low-e">
+                                <ul id='lowestring'>
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class='A'>A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>
+                                    <li class="E">E</li>
+                                </ul>
+                            </div>
+                            <div class="mask a">
+                                <ul id='astring'>
+                                    <li class="A">A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class="A">A</li>
+            
+                                </ul>
+                            </div>
+                            <div class="mask d">
+                                <ul id='dstring'>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class="A">A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                </ul>
+                            </div>
+                            <div class="mask g">
+                                <ul id='gstring'>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class="A">A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>  
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+            
+                                </ul>
+                            </div>
+                            <div class="mask b">
+                                <ul id='bstring'>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>   
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class="A">A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li></ul>
+                            </div>
+                            <div class="mask high-e">
+                                <ul id='highestring'>
+                                    <li class="E">E</li>
+                                    <li class="F">F</li>
+                                    <li class="Fsharp">F#</li>
+                                    <li class="G">G</li>
+                                    <li class="Gsharp">G#</li>
+                                    <li class='A'>A</li>
+                                    <li class="Asharp">A#</li>
+                                    <li class="B">B</li>
+                                    <li class="C">C</li>
+                                    <li class="Csharp">C#</li>
+                                    <li class="D">D</li>
+                                    <li class="Dsharp">D#</li>
+                                    <li class="E">E</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="list-inline">
+                                <!-- <li class="list-inline-item">Fret number:</li> -->
+                                <li class="list-inline-item">1</li>
+                                <li class="list-inline-item">2</li>
+                                <li class="list-inline-item">3</li>
+                                <li class="list-inline-item">4</li>
+                                <li class="list-inline-item">5</li>
+                                <li class="list-inline-item">6</li>
+                                <li class="list-inline-item">7</li>
+                                <li class="list-inline-item">8</li>
+                                <li class="list-inline-item">9</li>
+                                <li class="list-inline-item">10</li>
+                                <li class="list-inline-item">11</li>
+                                <li class="list-inline-item">12</li>
+                            </ul>
+                    </div>
+        </div>
+        <div class="col-sm-3">
+            <label for="progression-display">Your Chord Progression<button id="clear-chord-progression" class="btn btn-danger">Remove Progression</button></label>
+            <ul class="list-group" id="progression-chords">
 
-            <ul class="dots">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
             </ul>
-            <ul class="strings">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
 
-            <ul class="open-notes">
-                <li class="E">E</li>
-                <li class="B">B</li>
-                <li class="G">G</li>
-                <li class="D">D</li>
-                <li class="A">A</li>
-                <li class="E">E</li>
-            </ul>
-            <div class="notes" id="masks">  
-                <div class="mask low-e">
-                    <ul id='lowestring'>
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class='A'>A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>
-                        <li class="E">E</li>
-                    </ul>
-                </div>
-                <div class="mask a">
-                    <ul id='astring'>
-                        <li class="A">A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class="A">A</li>
-
-                    </ul>
-                </div>
-                <div class="mask d">
-                    <ul id='dstring'>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class="A">A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                    </ul>
-                </div>
-                <div class="mask g">
-                    <ul id='gstring'>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class="A">A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>  
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-
-                    </ul>
-                </div>
-                <div class="mask b">
-                    <ul id='bstring'>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>   
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class="A">A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li></ul>
-                </div>
-                <div class="mask high-e">
-                    <ul id='highestring'>
-                        <li class="E">E</li>
-                        <li class="F">F</li>
-                        <li class="Fsharp">F#</li>
-                        <li class="G">G</li>
-                        <li class="Gsharp">G#</li>
-                        <li class='A'>A</li>
-                        <li class="Asharp">A#</li>
-                        <li class="B">B</li>
-                        <li class="C">C</li>
-                        <li class="Csharp">C#</li>
-                        <li class="D">D</li>
-                        <li class="Dsharp">D#</li>
-                        <li class="E">E</li>
-                    </ul>
-                </div>
-            </div>
-            <ul class="list-inline">
-                    <!-- <li class="list-inline-item">Fret number:</li> -->
-                    <li class="list-inline-item">1</li>
-                    <li class="list-inline-item">2</li>
-                    <li class="list-inline-item">3</li>
-                    <li class="list-inline-item">4</li>
-                    <li class="list-inline-item">5</li>
-                    <li class="list-inline-item">6</li>
-                    <li class="list-inline-item">7</li>
-                    <li class="list-inline-item">8</li>
-                    <li class="list-inline-item">9</li>
-                    <li class="list-inline-item">10</li>
-                    <li class="list-inline-item">11</li>
-                    <li class="list-inline-item">12</li>
-                </ul>
         </div>
     </div>
 <!-- end neck html -->

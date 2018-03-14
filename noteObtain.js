@@ -11,7 +11,8 @@ var scale_pattern = [whole_step, whole_step, half_step, whole_step, whole_step, 
 //patterns for pentatonics
 var pattern_pent_maj=[whole_step, whole_step, half_step+whole_step, whole_step, whole_step+half_step];
 var pattern_pent_min=[whole_step+half_step, whole_step, whole_step, whole_step+ half_step, whole_step]
-var pattern_maj_min=[whole_step,half_step,half_step,whole_step,whole_step,half_step,whole_step]
+var pattern_maj_min=[whole_step,half_step,half_step,half_step,whole_step,whole_step,half_step,whole_step]
+
 
 var finalList={};
 var index_list={};
@@ -37,10 +38,13 @@ var index_list={};
     switch (mode){
         case "MAJOR-PENT":
             return_list = pattern_pent_maj;
+            break;
         case "MINOR-PENT":
             return_list =pattern_pent_min;
+            break;
         case "MAJ-MIN-PENT":
             return_list =pattern_maj_min;
+            break;
         default:
             for(i=0; i<scale_pattern.length; i++){
                 //go from the mode index, until you hit the mode index again, adding the mod of it and the array
@@ -92,7 +96,7 @@ function create_chord_JSON(root,mode){
         jazz:{}
     };
     
-    //for loop temps
+    //for-loop temp variables
     var relative_notes_loop;
     var relative_pattern_loop;
     var curr_scale_loop;
