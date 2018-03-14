@@ -33,8 +33,14 @@ $(document).ready(function(){
         notes = notes.split(": ")[1].split(",");
         removeSharps(notes);
         highlight(notes);
-    });   
-    
+        
+    });  
+    $(document).on('dblclick','.list-group-item',function(){
+        var notes = $(this).text();
+        addToProgression(notes);
+
+    });  
+
     $("#clearBoard").click(function(){
         dehighlight();
         clearBoard();
@@ -99,12 +105,9 @@ function clearBoard(){
 function dehighlight(){
     removeSharps(notes_arr);
     for(var i=0;i<notes_arr.length;i++){
-        if (i===1){
-            $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
-            $('.'+notes_arr[i]+'').css({'color':'white'});
-        }else{
-            $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
-        }    
+        $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        $('.'+notes_arr[i]+'').css({'color':'white'});
+        
     }
 }
 
@@ -117,6 +120,10 @@ function highlight(notes){
             $('.'+notes[i]+'').css({'background':'#9D002C'});
         }    
     }
+}
+
+function addToProgression(notes){
+    $("#progression-chords").append("<li class='list-group-item'>"+notes+"</li>");
 }
 
 

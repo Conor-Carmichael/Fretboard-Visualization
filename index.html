@@ -97,26 +97,28 @@
     </article>
     </div>
     <div id="scale-details" class="row">
-        <div class="col-sm-2 col-sm-offset-3">
-            <h2></h2>
+        <div class="col-sm-2 col-sm-offset-4">
+            <h2>Choose a Scale</h2>
             <p id="scalePara"></p>
         </div>
         <div class="col-sm-1 col-sm-offset-1">
             <span id="bpm-span">
-                <label id="bpm-label" for="set-bpm">Set BPM:<output for="set-bpm" id="bpmOutput"></output></label>
+                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">80</output></label>
                 <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
             <span>
         </div>
         
         <div class="col-sm-1">
-            <label>Metronome and Chords</label>
-            <button class="btn btn-warning"><span class="glyphicon glyphicon-play"></span>Start</button>
+            <label>Play Chords</label>
+            <button class="btn"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
+            <button class="btn"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
+
         </div>
     </div>
     
        
 <!-- expand to see guitar html -->
-    <div class="row">
+    <div class="row" class="main-div">
         <div class="col-sm-2"></div>
         <div class="col-sm-7">
             <div class="guitar-neck">
@@ -281,12 +283,17 @@
                             </ul>
                     </div>
         </div>
-        <div class="col-sm-3">
-            <label for="progression-display">Your Chord Progression<button id="clear-chord-progression" class="btn btn-danger">Remove Progression</button></label>
+        <div class="col-sm-3" id ="progression-div">
             <ul class="list-group" id="progression-chords">
-
+                <li class="list-group-item active">Your Chord Progression</li>
+                
             </ul>
-
+            <ul class="list-group">
+                <li class="list-group-item-active"></li>
+                    <button id="clear-chord-progression" class="btn" style="background-color:#9D002C;color:white;float:right">
+                            Remove Progression</button>  </li>                  
+                </ul>
+            
         </div>
     </div>
 <!-- end neck html -->

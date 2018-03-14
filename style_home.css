@@ -127,7 +127,9 @@ h1{
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
+#main-div{
+    position: absolute;
+}
 #mainArticle{
     padding-right:350px;
 }
@@ -187,4 +189,9 @@ h1{
     font-style: oblique;
     margin-right: 55px;
     color:white; 
+}
+
+#progression-div{
+    overflow: hidden;
+    
 }

@@ -89,9 +89,9 @@ h3 {
   height: 1px;
   display: inline-block;
   width: 100%;
-  background: #c8bb93;
+  background: #d3cdbc;
   margin-bottom: 38px;
-  border-bottom: 2px solid #958963;
+  border-bottom: 2px solid #9b9687;
   box-sizing: border-box;
 }
 .guitar-neck .strings li:nth-child(2) {
