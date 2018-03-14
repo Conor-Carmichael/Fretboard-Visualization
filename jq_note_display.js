@@ -12,7 +12,6 @@ $(document).ready(function(){
 
     $('#modeAndNoteSubmit').click(function(){
         clearBoard();
-        $('#currentProgression').append("<li>Drag&Drop to Build \nProgressions Here:</li>");
         var root = $('#notes').val();
         var scale_mode = $('#modes').val();
         totalJSON =  create_chord_JSON(root, scale_mode);
@@ -27,7 +26,7 @@ $(document).ready(function(){
     });
 
     //when clicking a chord, highlight it, dehighlight all first
-    $(document).on('click','.list-group-item',function(){
+    $(document).on('click','.chord',function(){
         dehighlight();
         var notes = $(this).text();
         notes = notes.split(": ")[1].split(",");
@@ -35,7 +34,7 @@ $(document).ready(function(){
         highlight(notes);
         
     });  
-    $(document).on('dblclick','.list-group-item',function(){
+    $(document).on('dblclick','.chord',function(){
         var notes = $(this).text();
         addToProgression(notes);
 
@@ -44,6 +43,7 @@ $(document).ready(function(){
     $("#clearBoard").click(function(){
         dehighlight();
         clearBoard();
+        clearProgression();
     });    
 });// END DOC READY
 
@@ -53,13 +53,13 @@ function showChords(){
     totalJSON.scale.forEach(function(note){
         n=note.toString();
         for (chord in totalJSON.basic[n]){
-            $("#basic-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.basic[note][chord]+"</li>")
+            $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.basic[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.inter[n]){
-            $("#intermediate-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.inter[note][chord]+"</li>")
+            $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.inter[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.jazz[n]){
-            $("#jazz-chords").append("<li class='list-group-item'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.jazz[note][chord]+"</li>")
+            $("#jazz-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.jazz[note][chord]+"</button></li>")
         }
     });    
 }
@@ -99,6 +99,11 @@ function clearBoard(){
     $('.D').css({'background':'#211f1d'});
     $('.G').css({'background':'#211f1d'});
     $('.B').css({'background':'#211f1d'});
+}
+
+function clearProgression(){
+    $("#progression-chords").empty();
+    $("#progression-chords").append("<li class='list-group-item active'>Your Chord Progression</li>")
 }
 
 

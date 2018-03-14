@@ -115,20 +115,16 @@ h1{
     padding: 10px;
 }
 
-#login{
-    padding:8px 4px 8px 4px;
+.col-sm-2{
+    overflow-y: scroll;
 }
-
-#loginSubmit{
-    width:100%;
-} 
-
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
 #main-div{
     position: absolute;
+    overflow-y: scroll;
 }
 #mainArticle{
     padding-right:350px;
@@ -148,23 +144,23 @@ h1{
     width: 12.5%;
 /*    border:solid 1px white;*/
 }
-#chordsInScale li{
+/* #chordsInScale li{
     font-size: 16px;
     list-style: none;
     padding:.5em 1em 0em 1em;
     background: black;
     color: #F9F7F2;
     border: solid 1px grey;
-}
+} */
 
-#currentProgression li{
+/* #currentProgression li{
     font-size: 16px;
     list-style: none;
     padding:.5em 1em 0em 1em;
     background: black;
     color: #F9F7F2;
     border: solid 1px grey;
-}
+} */
 .active{
     background-color:#9D002C !important;
     border-color:#9D002C !important;
@@ -190,8 +186,26 @@ h1{
     margin-right: 55px;
     color:white; 
 }
-
+#main-div{
+    overflow-y: scroll;
+}
 #progression-div{
-    overflow: hidden;
-    
+    /* position: absolute; */
+    overflow: scroll;    
+    max-height: 0%;
+    display:inline-block;
+}
+
+#progression-chords{
+    overflow-y:scroll;
+    height:350px;
+}
+.chord-button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }

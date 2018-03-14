@@ -118,7 +118,7 @@
     
        
 <!-- expand to see guitar html -->
-    <div class="row" class="main-div">
+    <div class="row" class="main-div" style="overflow:hidden">
         <div class="col-sm-2"></div>
         <div class="col-sm-7">
             <div class="guitar-neck">
@@ -284,15 +284,12 @@
                     </div>
         </div>
         <div class="col-sm-3" id ="progression-div">
-            <ul class="list-group" id="progression-chords">
+            <ul class="list-group" id="progression-chords"  >
                 <li class="list-group-item active">Your Chord Progression</li>
-                
             </ul>
             <ul class="list-group">
-                <li class="list-group-item-active"></li>
-                    <button id="clear-chord-progression" class="btn" style="background-color:#9D002C;color:white;float:right">
-                            Remove Progression</button>  </li>                  
-                </ul>
+                <li class="list-group-item-active"><button id="clear-chord-progression" onclick="clearProgression()" class="btn" style="background-color:#9D002C;color:white;float:right">Remove Progression</button></li>                  
+            </ul>
             
         </div>
     </div>
