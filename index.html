@@ -16,7 +16,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-
+        <script type="text/javascript" src="Metronome.js"></script>
+        <script type="text/javascript" src="MetronomeClass.js"></script>
         <script type="text/javascript" src="noteObtain.js"></script>
         <script type="text/javascript" src="jq_note_display.js"></script>
 <!--        Stylesheets-->
@@ -29,7 +30,7 @@
 		<title>Music MeetUp</title>
 	</head>
 	<body>
-
+    <embed src="High Seiko SQ50.wav" autostart="false" width="0" height="0" id="metronome-sound"  enablejavascript="true">
     <div class='row'>
         <div class="col-sm-6 col-sm-offset-4">
             <h1>Fretboard Visualization</h1>
@@ -79,6 +80,13 @@
         <!--<input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;-->
         <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
         <div class="col-sm-1">
+            <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals are only available for modes of the Major scale." >Roman Numerals *</label>
+            <label class="switch">
+                <input type="checkbox" id="rn" data-toggle="tooltop" data-placement="bottom" title="Roman Numerals are only available for modes of the Major scale.">
+                <span class="slider round"></span>
+            </label>        
+        </div>
+        <div class="col-sm-1">
             <label for="modeAndNoteSubmit">Generate Fretboard!</label>                    
             <button type="button" class="btn btn-success"  id="modeAndNoteSubmit">
                 <span class="glyphicon glyphicon-music"></span> Go!
@@ -97,10 +105,11 @@
     </article>
     </div>
     <div id="scale-details" class="row">
-        <div class="col-sm-2 col-sm-offset-4">
+        <div class="col-sm-2 col-sm-offset-3">
             <h2>Choose a Scale</h2>
             <p id="scalePara"></p>
         </div>
+        
         <div class="col-sm-1 col-sm-offset-1">
             <span id="bpm-span">
                 <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">80</output></label>
@@ -110,8 +119,8 @@
         
         <div class="col-sm-1">
             <label>Play Chords</label>
-            <button class="btn"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
-            <button class="btn"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
+            <button class="btn" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
+            <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
 
         </div>
     </div>

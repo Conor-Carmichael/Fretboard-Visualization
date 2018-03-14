@@ -2,13 +2,16 @@ var color_counter=0;
 var bebop;
 var blues;
 var totalJSON;
+var set_numerals = false;
 
-$(document).ready(function(){
-    $( function() {
-        $( "#chordsInScale, #currentProgression" ).sortable({
-            connectWith: ".connectedSortable"
-        }).disableSelection();
-    } );    
+roman_numerals = ["I","II","III","IV","V","VI","VII"]
+
+$(document).ready(function(){   
+
+    $("[data-toggle='tooltip']").tooltip();
+    if ($('#rn').is(":checked")){
+        set_numerals=true;
+    }
 
     $('#modeAndNoteSubmit').click(function(){
         clearBoard();
@@ -39,6 +42,12 @@ $(document).ready(function(){
         addToProgression(notes);
 
     });  
+
+    $("#play").on('click',function(){
+        metronomeApp.toggle();
+    });
+
+    
 
     $("#clearBoard").click(function(){
         dehighlight();
@@ -136,6 +145,10 @@ function showNote(notes){
     for(var i=0;i<notes.length;i++){
             $('.'+notes[i]+'').animate({opacity:1});
             $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+            if(set_numerals){
+                $('.'+notes[i]+"").text(roman_numerals[i]);
+
+            }
     }
 }
 
@@ -153,4 +166,7 @@ function addSharps(arr_){
 
 function outputUpdate(bpm){
     $("#bpmOutput").text(bpm);
+    metronomeApp.setTempo(Number(bpm))
 }
+
+
