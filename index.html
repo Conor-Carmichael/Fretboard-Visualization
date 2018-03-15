@@ -81,10 +81,7 @@
         <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
         <div class="col-sm-1">
             <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals are only available for modes of the Major scale." >Roman Numerals *</label>
-            <label class="switch">
-                <input type="checkbox" id="rn" data-toggle="tooltop" data-placement="bottom" title="Roman Numerals are only available for modes of the Major scale.">
-                <span class="slider round"></span>
-            </label>        
+            <button class="btn btn-info" id="rn">I,II..</button>      
         </div>
         <div class="col-sm-1">
             <label for="modeAndNoteSubmit">Generate Fretboard!</label>                    
@@ -94,7 +91,7 @@
                 <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
         </div>               
         <div class="col-sm-1">
-                <label for="modeAndNoteSubmit">Clear Notes on Fretboard!</label>
+                <label for="modeAndNoteSubmit">Clear Fretboard!</label>
                         
                 <button type="button" class="btn btn-warning"  id="clearBoard">
                     <span class="glyphicon glyphicon-refresh"></span> Go!
@@ -104,32 +101,49 @@
         
     </article>
     </div>
-    <div id="scale-details" class="row">
-        <div class="col-sm-2 col-sm-offset-3">
+    <div id="scale-details" class="row" >
+        <div class="col-sm-3 col-sm-offset-2" >
             <h2>Choose a Scale</h2>
             <p id="scalePara"></p>
         </div>
         
         <div class="col-sm-1 col-sm-offset-1">
             <span id="bpm-span">
-                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">80</output></label>
+                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
                 <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
             <span>
+            
         </div>
         
-        <div class="col-sm-1">
-            <label>Play Chords</label>
-            <button class="btn" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
-            <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
+        
+        <div class="col-sm-2">
+            <span>
+                <label for="chords">Play Chords</label>
+                <span id="controls">
+                    <button class="btn" onclick="metronomeApp.toggle()" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
+                    <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
+                </span>
+                
+            </span>
+            
 
+        </div>
+        <div class="col-sm-3">
+            <ul class="list-inline">
+                <li class="list-inline-item metronome-ind" id="metr-square-1"></li>
+                <li class="list-inline-item metronome-ind"id="metr-square-2"></li>
+                <li class="list-inline-item metronome-ind" id="metr-square-3"></li>
+                <li class="list-inline-item metronome-ind" id="metr-square-4"></li>
+            </ul>
+            
         </div>
     </div>
     
        
 <!-- expand to see guitar html -->
     <div class="row" class="main-div" style="overflow:hidden">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-7">
+        
+        <div class="col-sm-7 col-sm-offset-2">
             <div class="guitar-neck">
 
             
@@ -288,7 +302,7 @@
                                 <li class="list-inline-item">9</li>
                                 <li class="list-inline-item">10</li>
                                 <li class="list-inline-item">11</li>
-                                <li class="list-inline-item">12</li>
+                                <!-- <li class="list-inline-item">12</li> -->
                             </ul>
                     </div>
         </div>
@@ -297,7 +311,7 @@
                 <li class="list-group-item active">Your Chord Progression</li>
             </ul>
             <ul class="list-group">
-                <li class="list-group-item-active"><button id="clear-chord-progression" onclick="clearProgression()" class="btn" style="background-color:#9D002C;color:white;float:right">Remove Progression</button></li>                  
+                <li class="list-group-item-active"><button id="clear-chord-progression" onclick="clearProgression()" class="btn" style="background-color:#9D002C;color:white">Remove Progression</button></li>                  
             </ul>
             
         </div>

@@ -1,3 +1,8 @@
+:root{
+  --widthofguitar:68.5em;
+  --heightofguitar:18em;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400");
 * {
   margin: 0;
@@ -18,12 +23,12 @@ h3 {
   display: inline-block;
     /* float: right; */
   position: relative;
-  margin-top: 40px;
+  margin-top: 16px;
   /* margin-left: 15%; */
-    margin-right: 16px;
+  margin-right: 16px;
 
-  width: 960px;
-  height: 250px;
+  width: var(--widthofguitar);
+  height: var(--heightofguitar);
   background: #241D00;
   box-shadow: inset -1px 0px 11px 0px rgba(0, 0, 0, 0.75);
 }
@@ -65,7 +70,7 @@ h3 {
 }
 .guitar-neck .dots {
   position: absolute;
-  width: 642px;
+  width: 852px;
   height: 20px;
   top: 44%;
   left: 19.5%;
@@ -76,7 +81,7 @@ h3 {
   height: 20px;
   border-radius: 50%;
   background: #F9F7F2;
-  margin-right: 140px;
+  margin-right: 133px;
 }
 .guitar-neck .strings {
   position: absolute;

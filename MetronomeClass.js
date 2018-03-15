@@ -9,7 +9,7 @@ class MetronomeApp {
      * @param startStopId the ID of the HTML button to start and stop the metronome
      */
     constructor(soundsPath, sounds, visSettings, soundSelectId, visTypeSelectId, startStopId) {
-        this.visSettings = visSettings;
+        // this.visSettings = visSettings;
         this.soundSelectId = soundSelectId || 'metroSound';
         this.visTypeSelectId = visTypeSelectId || 'visType';
         this.startStopId = startStopId || 'metronome';
@@ -20,7 +20,7 @@ class MetronomeApp {
         };
         this.metroSound = new MetronomeSound(soundsPath, sounds, metroSoundListener);
 
-        visSettings.getTime = () => this.metroSound.audioContext.currentTime;
+        // visSettings.getTime = () => this.metroSound.audioContext.currentTime;
 
         const soundSelect = $('#' + this.soundSelectId);
         for (const name of sounds) {
@@ -29,12 +29,12 @@ class MetronomeApp {
             soundSelect.append(`<option>${optionText}</option>`);
         }
 
-        const visTypeSelect = $('#' + this.visTypeSelectId);
-        visTypeSelect.append('<option>None</option>');
-        visSettings.names.map((visTypeName, index) => {
-            const sel = index === 0 ? ' selected' : '';
-            visTypeSelect.append(`<option${sel}>${visTypeName}</option>`);
-        });
+        // const visTypeSelect = $('#' + this.visTypeSelectId);
+        // visTypeSelect.append('<option>None</option>');
+        // visSettings.names.map((visTypeName, index) => {
+        //     const sel = index === 0 ? ' selected' : '';
+        //     visTypeSelect.append(`<option${sel}>${visTypeName}</option>`);
+        // });
     }
 
     /**
@@ -69,5 +69,4 @@ class MetronomeApp {
 }
 
 const metronomeApp = new MetronomeApp('assets/',
-    ["High Seiko SQ50.wav"],
-    VisSettings);
+    ["High Seiko SQ50.wav"]);

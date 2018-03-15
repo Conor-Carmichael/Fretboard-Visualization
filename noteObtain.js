@@ -164,21 +164,21 @@ var basic_chord_functions={
     }
 }
 
-var inter_function_names=["sus2Chord","sus4Chord","augmentedChord","diminishedChord", "add_nineChord"]
+var inter_function_names=["Sus2Chord","Sus4Chord","AugmentedChord","DiminishedChord", "Add_NineChord"]
 var intermediate_chord_functions = {
-    sus2Chord : function(notes){
+    Sus2Chord : function(notes){
         return [notes[0],notes[2],notes[7]]
     },
-    sus4Chord : function(notes){
+    Sus4Chord : function(notes){
         return [notes[0],notes[5],notes[7]]
     },
-    augmentedChord : function(notes){
+    AugmentedChord : function(notes){
         return [notes[0], notes[4], notes[8]]
     },
-    diminishedChord : function(notes){
+    DiminishedChord : function(notes){
         return [notes[0], notes[3], notes[6]]
     },
-    add_nineChord : function(notes){
+    Add_NineChord : function(notes){
         return [notes[0], notes[4], notes[7], notes[2]] 
     }
 }
@@ -187,6 +187,9 @@ var jazz_chord_functions = {
     Major7thChord : function(notes){
         return [notes[0],notes[4],notes[7], notes[9]];
     }
+    // Minor7thChord : function(notes){
+    //     return [notes[0],notes[4],notes[7], notes[9]];
+    // }
 }
 
 

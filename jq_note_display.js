@@ -1,31 +1,48 @@
-var color_counter=0;
 var bebop;
 var blues;
 var totalJSON;
-var set_numerals = false;
+var showing_numerals = false;
+var current_scale=null;
+var stop=false;
 
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
 
 $(document).ready(function(){   
-
     $("[data-toggle='tooltip']").tooltip();
-    if ($('#rn').is(":checked")){
-        set_numerals=true;
-    }
+
+    $('#rn').click(function(){
+        if(showing_numerals){
+            showNote(current_scale);
+            showing_numerals=false;
+        }
+        else if(current_scale !== null){
+            showing_numerals=true;
+            showNumerals(current_scale);
+        }
+         
+    });
 
     $('#modeAndNoteSubmit').click(function(){
-        clearBoard();
-        var root = $('#notes').val();
-        var scale_mode = $('#modes').val();
-        totalJSON =  create_chord_JSON(root, scale_mode);
-        showChords();
+        if(showing_numerals){
+            alert("Must switch off roman numerals.");
+        }
+        else{
+            clearBoard();
+            var root = $('#notes').val();
+            var scale_mode = $('#modes').val();
+            totalJSON =  create_chord_JSON(root, scale_mode);
+            showChords();
 
-        addHeading(totalJSON.scale, totalJSON.scale[0], scale_mode)
-        
-        // appendKeys(objTemp);
-        var temp = totalJSON.scale;
-        removeSharps(temp);
-        showNote(temp);        
+            addHeading(totalJSON.scale, totalJSON.scale[0], scale_mode)
+            
+            // appendKeys(objTemp);
+            var temp = totalJSON.scale;
+            current_scale=temp;
+
+            removeSharps(temp);
+            showNote(temp);      
+        }
+          
     });
 
     //when clicking a chord, highlight it, dehighlight all first
@@ -44,37 +61,53 @@ $(document).ready(function(){
     });  
 
     $("#play").on('click',function(){
-        metronomeApp.toggle();
+        highlightMetronome().promise();
     });
-
+    $("#pause").on('click',function(){
+        stop = true;
+    });
     
 
     $("#clearBoard").click(function(){
-        dehighlight();
-        clearBoard();
-        clearProgression();
+        if(showing_numerals){
+            if(confirm("Must reload page to restore notes, remove numerals. Continue?"))
+                location.reload();
+        }
+        else{
+            dehighlight();
+            clearBoard();
+            clearProgression();
+        }
+        
     });    
 });// END DOC READY
 
+
+function formattedStr(str){
+    str= str.replace("Chord", "");
+    str = str.replace(/[_]/g, " ");
+    return str;
+}
 
 function showChords(){
     var n;
     totalJSON.scale.forEach(function(note){
         n=note.toString();
         for (chord in totalJSON.basic[n]){
-            $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.basic[note][chord]+"</button></li>")
+            $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.basic[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.inter[n]){
-            $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.inter[note][chord]+"</button></li>")
+            $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.inter[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.jazz[n]){
-            $("#jazz-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+chord.replace("Chord","")+": "+totalJSON.jazz[note][chord]+"</button></li>")
+            $("#jazz-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.jazz[note][chord]+"</button></li>")
         }
     });    
 }
 
 function addHeading(scale, root, mode){
     $('h2').text(root+" "+mode+":");
+    addSharps(scale)
     $('#scalePara').text(scale.toString());
 }
 function appendKeys(chordObj){
@@ -89,17 +122,20 @@ function appendKeys(chordObj){
 
 
 function clearBoard(){
+    current_scale=null;
+    showing_numerals=false;
     color_counter=0;
     $('#lowestring li').animate({opacity:0});
     $('#astring li').animate({opacity:0});
     $('#dstring li').animate({opacity:0});
     $('#gstring li').animate({opacity:0});
     $('#bstring li').animate({opacity:0});
-    $('#highestring li').animate({opacity:0});
-    $('#basic-chords li:not(:first)').remove();
-    $('#intermediate-chords li:not(:first)').remove();
-    $('#jazz-chords li:not(:first)').remove();
-    
+    if(!showing_numerals){
+        $('#highestring li').animate({opacity:0});
+        $('#basic-chords li:not(:first)').remove();
+        $('#intermediate-chords li:not(:first)').remove();
+        $('#jazz-chords li:not(:first)').remove();
+    }
     $('#currentProgression').empty();
     $('h2').text("");
     $('#scalePara').text("");
@@ -121,7 +157,6 @@ function dehighlight(){
     for(var i=0;i<notes_arr.length;i++){
         $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
         $('.'+notes_arr[i]+'').css({'color':'white'});
-        
     }
 }
 
@@ -137,20 +172,31 @@ function highlight(notes){
 }
 
 function addToProgression(notes){
+    addSharps(notes)
     $("#progression-chords").append("<li class='list-group-item'>"+notes+"</li>");
 }
 
 
 function showNote(notes){
     for(var i=0;i<notes.length;i++){
-            $('.'+notes[i]+'').animate({opacity:1});
-            $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
-            if(set_numerals){
-                $('.'+notes[i]+"").text(roman_numerals[i]);
-
-            }
+        $('.'+notes[i]+'').animate({opacity:1});
+        $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        if(showing_numerals){
+            var temp = notes.slice()
+            addSharps(temp)
+            $('.'+notes[i]+"").text(temp[i]);
+        }
     }
 }
+
+function showNumerals(notes){
+    for(var i=0;i<notes.length;i++){
+        $('.'+notes[i]+'').animate({opacity:1});
+        $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        $('.'+notes[i]+"").text(roman_numerals[i]);
+    }
+}
+
 
 function removeSharps(arr_){
     for(var c=0;c<arr_.length;c++){
@@ -169,4 +215,59 @@ function outputUpdate(bpm){
     metronomeApp.setTempo(Number(bpm))
 }
 
+function highlightMetronome(d){
+    if(!stop){
+
+    var tempo = Number($("#set-bpm").val());
+    
+    var ms = (1/ (tempo/60))* 1000;
+    // alert(ms)
+
+    $("#metr-square-1").animate({
+        backgroundColor:'red',
+        height:"+=4",
+        width:"+=4"
+    },0.5*ms).animate({
+        backgroundColor:'white',
+        height:"-=4",
+        width:"-=4"
+    },0.5*ms);
+    
+    $("#metr-square-2").delay(ms).animate({
+        backgroundColor:'red',
+        height:"+=4",
+        width:"+=4"
+    },0.5*ms).animate({
+        backgroundColor:'white',
+        height:"-=4",
+        width:"-=4"
+    },0.5*ms);
+
+    $("#metr-square-3").delay(2*ms).animate({
+        backgroundColor:'red',
+        height:"+=4",
+        width:"+=4"
+    },0.5*ms).animate({
+        backgroundColor:'white',
+        height:"-=4",
+        width:"-=4"
+    },0.5*ms);
+    
+    $("#metr-square-4").delay(3*ms).animate({
+        backgroundColor:'red',
+        height:"+=4",
+        width:"+=4"
+    },0.5*ms).animate({
+        backgroundColor:'white',
+        height:"-=4",
+        width:"-=4"
+    },0.5*ms, function(){
+        highlightMetronome()
+    });
+    }
+    else{
+        stop=false;
+    }
+
+}
 

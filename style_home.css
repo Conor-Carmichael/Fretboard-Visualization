@@ -32,7 +32,7 @@ h1{
     width:100%;
     font-size: 20px;
     color:white;
-    /* background: linear-gradient(to right, rgba(0,0,0,0) 0%, black 50%, rgba(0,0,0,0)100% ); */
+    margin-top:4px;
 }
 
 .container {
@@ -40,77 +40,6 @@ h1{
     /* background-color: rgba(0,0,0,0); */
     border-bottom: solid;
     border-bottom-color: white;
-}
-#spanOption{
-    float : left;
-    align-content: center;
-/*    font: black;*/
-    padding-top:.5em;
-}
-
-#spanOption:hover{
-    color:  #9D002C;
-    transition: .5s;
-}
-/* drop down menu*/
-.container a {
-    float: left;
-    font-size: 30px;
-    color: white;
-    text-align: center;
-    padding: 14px 32px;
-    text-decoration: none;
-    transition: all .5s ease;
-}
-
-.dropdown {
-    float: left;
-    overflow: hidden;
-    transition: all .5s ease;
-}
-
-.dropdown .dropbtn {
-    font-size: 30px;    
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 32px;
-    background-color: inherit;
-    transition: all .5s ease;
-
-}
-
-.container a:hover, .dropdown:hover .dropbtn {
-    font-size:40px;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #9D002C;
-/*    font-color:white;*/
-    transition: .25s;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    transition: .3s;
 }
 
 
@@ -122,10 +51,7 @@ h1{
 .col-sm-2{
     overflow-y: scroll;
 }
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
+
 #main-div{
     position: absolute;
     overflow-y: scroll;
@@ -134,37 +60,6 @@ h1{
     padding-right:350px;
 }
 
-#chord-listings{
-    display: inline-block;
-    margin-left: 0;
-    float: left;
-    width: 12.5%;
-}
-#chords-progression{
-    position: fixed;
-   display: inline-block;
-    margin-left: 0;
-    float: left;
-    width: 12.5%;
-/*    border:solid 1px white;*/
-}
-/* #chordsInScale li{
-    font-size: 16px;
-    list-style: none;
-    padding:.5em 1em 0em 1em;
-    background: black;
-    color: #F9F7F2;
-    border: solid 1px grey;
-} */
-
-/* #currentProgression li{
-    font-size: 16px;
-    list-style: none;
-    padding:.5em 1em 0em 1em;
-    background: black;
-    color: #F9F7F2;
-    border: solid 1px grey;
-} */
 .checkbox{
     font-size: 5em;
 }
@@ -190,7 +85,7 @@ h1{
 }
 .list-inline-item{
     font-style: oblique;
-    margin-right: 55px;
+    margin-right: 54px;
     color:white; 
 }
 #main-div{
@@ -200,12 +95,12 @@ h1{
     /* position: absolute; */
     overflow: scroll;    
     max-height: 0%;
-    display:inline-block;
+    /* display:inline-block; */
 }
 
 #progression-chords{
     overflow-y:scroll;
-    height:350px;
+    height:250px;
 }
 .chord-button{
     background: none;
@@ -216,60 +111,11 @@ h1{
     cursor: pointer;
     outline: inherit;
 }
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 45px;
-    height: 26px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {display:none;}
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(18px);
-    -ms-transform: translateX(18px);
-    transform: translateX(18px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 16px;
-  }
-  
-  .slider.round:before {
-    border-radius: 70%;
-  }
+
+.metronome-ind{
+    margin-top: 14px;
+    width:22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color:white;
+}
