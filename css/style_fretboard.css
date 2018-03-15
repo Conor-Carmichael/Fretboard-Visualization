@@ -47,7 +47,9 @@ h3 {
   font-size: 18px;
   color: #fff;
   text-align: center;
-  width: 100%;
+  border-radius: 50%;
+  width: 60%;
+  height: 150%;
 }
 .guitar-neck .open-notes li.active {
   color: #fa990f;

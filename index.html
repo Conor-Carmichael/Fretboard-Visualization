@@ -2,37 +2,32 @@
 <html>
 	<head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<!--        Scripts-->
+    <!-- Latest js CDN's -->
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- bootstrap cdns -->
-                
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script
-        src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
-        integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
-        crossorigin="anonymous"></script>      
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
+            crossorigin="anonymous"></script>      
 
-        <!-- Latest compiled JavaScript -->
+    <!-- bootstrap CDN's -->    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!--Scripts-->
+        <script type="text/javascript" src="./js/Metronome/Metronome.js"></script>
+        <script type="text/javascript" src="./js/Metronome/MetronomeClass.js"></script>
+        <script type="text/javascript" src="./js/noteObtain.js"></script>
+        <script type="text/javascript" src="./js/jq_note_display.js"></script>
+    <!--Stylesheets-->
 
-        <script type="text/javascript" src="Metronome.js"></script>
-        <script type="text/javascript" src="MetronomeClass.js"></script>
-        <script type="text/javascript" src="noteObtain.js"></script>
-        <script type="text/javascript" src="jq_note_display.js"></script>
-<!--        Stylesheets-->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
-        <link href='https://fonts.googleapis.com/css?family=Kameron' rel='stylesheet'>
-        -->
-        <link rel="stylesheet" type="text/css" href="style_home.css">
-        <link rel="stylesheet" type="text/css" href="style_fretboard.css">
+        <link rel="stylesheet" type="text/css" href="./css/style_home.css">
+        <link rel="stylesheet" type="text/css" href="./css/style_fretboard.css">
 
-		<title>Music MeetUp</title>
-	</head>
+        <title>Music MeetUp</title>
+        
+    </head>
+    
 	<body>
     <embed src="High Seiko SQ50.wav" autostart="false" width="0" height="0" id="metronome-sound"  enablejavascript="true">
     <div class='row'>
@@ -42,12 +37,12 @@
     </div>
 
             
-<!--            article to display fretboard and options-->
+<!-- Displays the key selections tools, roman numeral option and generate and clear-->
 
     <div class="row">
         <article id="chordSetUp">
-
-            <div class="form-group col-sm-2 col-sm-offset-3">
+            <!-- root note -->
+            <div class="form-group col-sm-2 col-sm-offset-2">
                 <label for="notes" style="font-size:20px">Select a root note:<span class"glyphicon glyphicon-music"></span></label>
                 <select class="form-control" name="notes" id="notes">
                     <option value="A">A</option>
@@ -64,7 +59,7 @@
                     <option value="G#">G#</option>
                 </select>
             </div>
-
+            <!-- mode/scale -->
             <div class="form-group col-sm-2">
                     <label for="modes" style="font-size:20px">Select a mode:</label>
                     <select class="form-control" name="modes" id="modes">
@@ -80,46 +75,42 @@
                         <option value="MAJ-MIN-PENT">Major & Minor Pent</option>                           
                     </select>
             </div>
-            
+        <!-- Option to add in blue and bebop notes -->
         <!--<input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;-->
         <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
+
+        <!-- Roman Numeral switch -->
         <div class="col-sm-1">
             <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals are only available for modes of the Major scale." >Roman Numerals *</label>
             <button class="btn btn-info" id="rn">I,II..</button>      
         </div>
+
+        <!-- Submit and clear functionality -->
         <div class="col-sm-1">
             <label for="modeAndNoteSubmit">Generate Fretboard!</label>                    
             <button type="button" class="btn btn-success"  id="modeAndNoteSubmit">
                 <span class="glyphicon glyphicon-music"></span> Go!
             </button>            
-                <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
         </div>               
         <div class="col-sm-1">
-                <label for="modeAndNoteSubmit">Clear Fretboard!</label>
-                        
-                <button type="button" class="btn btn-warning"  id="clearBoard">
-                    <span class="glyphicon glyphicon-refresh"></span> Go!
-                </button>            
-                    <!-- <span class"glyphicon glyphicon-search"></span>&nbsp; -->
-            </div>        
-        
-    </article>
+            <label for="modeAndNoteSubmit">Clear Fretboard!</label>
+                    
+            <button type="button" class="btn btn-warning"  id="clearBoard">
+                <span class="glyphicon glyphicon-refresh"></span> Go!
+            </button>            
+        </div>        
+        </article>
     </div>
+
+
+<!-- Shows the details of the scale, and metronome options. -->
+    
     <div id="scale-details" class="row" >
-        <div class="col-sm-3 col-sm-offset-2" >
+        <div class="col-sm-2 col-sm-offset-2" >
             <h2>Choose a Scale</h2>
             <p id="scalePara"></p>
         </div>
-        
-        <div class="col-sm-1 col-sm-offset-1">
-            <span id="bpm-span">
-                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
-                <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
-            <span>
-            
-        </div>
-        
-        
+
         <div class="col-sm-2">
             <span>
                 <label for="chords">Play Chords</label>
@@ -129,9 +120,18 @@
                 </span>
                 
             </span>
-            
-
         </div>
+        <!-- Setting BPM -->
+        <div class="col-sm-1">
+            <span id="bpm-span">
+                <!-- <input type="text" min="50" max="150"> -->
+                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
+                <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
+            <span>
+            
+        </div>
+        
+                    
         <div class="col-sm-3">
             <ul class="list-inline">
                 <li class="list-inline-item metronome-ind" id="metr-square-1"></li>
@@ -147,7 +147,7 @@
 <!-- expand to see guitar html -->
     <div class="row" class="main-div" style="overflow:hidden">
         
-        <div class="col-sm-7 col-sm-offset-2">
+        <div class="col-sm-7 col-sm-offset-2" style="padding-left:6em;">
             <div class="guitar-neck">
 
             
@@ -310,15 +310,7 @@
                             </ul>
                     </div>
         </div>
-        <div class="col-sm-3" id ="progression-div">
-            <ul class="list-group" id="progression-chords"  >
-                <li class="list-group-item active">Your Chord Progression</li>
-            </ul>
-            <ul class="list-group">
-                <li class="list-group-item-active"><button id="clear-chord-progression" onclick="clearProgression()" class="btn" style="background-color:#9D002C;color:white">Remove Progression</button></li>                  
-            </ul>
-            
-        </div>
+       
     </div>
 <!-- end neck html -->
 <!-- 
@@ -341,49 +333,46 @@
             </ul>
         </div>
     </div> -->
-        
-    <!-- <div id="chord-listings">
-
-        <ul id="chordsInScale" class="connectedSortable">
-        </ul>
-        
-    </div>    
-    <div id="chords-progression">
-        <ul id="currentProgression" class="connectedSortable">
-        </ul>
-    </div> -->
 
     <div class="row" id="carousel-row">
-        <div class="col-sm-9 col-sm-offset-1">
-        <div class="carousel slide" data-ride="carousel" id="chord-carousel">
-            <ol>
-                <li data-target="#chord-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#chord-carousel" data-slide-to="1"></li>
-                <li data-target="#chord-carousel" data-slide-to="2"></li>
-            </ol>
+        <!-- chord progression -->
+        <div class="col-sm-3 col-sm-offset-2" id ="progression-div">
+                <ul class="list-group" id="progression-chords">
+                    <li class="list-group-item active">Your Chord Progression<button id="clear-chord-progression" onclick="clearProgression()" 
+                        class="btn" style="padding:0px;float:right;background-color:#9D002C;color:white">Remove Progression</button></li>
+                </ul>
+        </div>
+        <!-- carousel -->
+        <div class="col-sm-4">
+            <div class="carousel slide" data-ride="carousel" id="chord-carousel">
+                <ol>
+                    <li data-target="#chord-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#chord-carousel" data-slide-to="1"></li>
+                    <li data-target="#chord-carousel" data-slide-to="2"></li>
+                </ol>
 
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div>
-                        <ul class="list-group" id="basic-chords">
-                            <li class="list-group-item active">Basic Chords</li>
-                        </ul>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div>
+                            <ul class="list-group" id="basic-chords">
+                                <li class="list-group-item active">Basic Chords</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div >
-                        <ul class="list-group" id="intermediate-chords">
-                            <li class="list-group-item active">Intermediate Chords</li>
-                        </ul>
+                    <div class="item">
+                        <div >
+                            <ul class="list-group" id="intermediate-chords">
+                                <li class="list-group-item active">Intermediate Chords</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div>
-                        <ul class="list-group" id="jazz-chords">
-                            <li class="list-group-item active">Jazz Chords</li>
-                        </ul>
+                    <div class="item">
+                        <div>
+                            <ul class="list-group" id="jazz-chords">
+                                <li class="list-group-item active">Jazz Chords</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
             </div>
 
             <a class="left carousel-control" href="#chord-carousel" data-slide="prev">

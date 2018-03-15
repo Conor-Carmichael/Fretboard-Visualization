@@ -5,6 +5,13 @@ var showing_numerals = false;
 var current_scale=null;
 var stop=false;
 current_progression= new Array(4);
+var prog_count=0;
+var metronomeSoundOne = new Audio("./Assets/Ping Hi.wav");
+var metronomeSoundTwo = new Audio("./Assets/Ping Low.wav");
+
+// for (var i=0;i<4;i++){
+//     current_progression[i];
+// }
 
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
 
@@ -174,14 +181,23 @@ function highlight(notes){
     }
 }
 
+// function addArrays(){
+    
+//     return ret;
+// }
+
 function addToProgression(notes){
     addSharps(notes)
-    var a = notes.split(": ");
-    var a1 = a[1].split(",");
-    current_progression.concat([a1]);
-    alert(current_progression);
-    // alert(current_scale)
-    
+    // var a = notes.split(": ");
+    // var a1 = a[1].split(",");
+    // var x=[]
+    // for(x in a1){
+    //     x
+    // }
+    // // alert(Array.isArray(a1))   
+    // // var temp = addArrays(current_progression, a1);
+    // current_progression[prog_count++] = a1;
+    // alert(current_progression);
     $("#progression-chords").append("<li class='list-group-item'>"+notes+"</li>");
 }
 
@@ -242,7 +258,7 @@ function highlightMetronome(){
         
         var ms = (1/ (tempo/60))* 1000;
         // alert(ms)
-
+        metronomeSoundOne.play();
         $("#metr-square-1").animate({
             backgroundColor:'red',
             height:"+=4",
@@ -252,7 +268,7 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
-        
+        metronomeSoundTwo.play();
         $("#metr-square-2").delay(ms).animate({
             backgroundColor:'red',
             height:"+=4",
@@ -262,6 +278,7 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
+        metronomeSoundTwo.play();
 
         $("#metr-square-3").delay(2*ms).animate({
             backgroundColor:'red',
@@ -272,7 +289,8 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
-        
+        metronomeSoundTwo.play();
+
         $("#metr-square-4").delay(3*ms).animate({
             backgroundColor:'red',
             height:"+=4",

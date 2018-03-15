@@ -27,6 +27,9 @@ h1{
     font-family: 'Kameron';
     font-size: 48px;
 }
+h2{
+    margin-top:0;
+}
 #scale-details{
     text-align: center;
     width:100%;
@@ -76,6 +79,7 @@ h1{
 }
 .carousel-control.right, .carousel-control.left {
     background-image:none;
+    color: #9D002C;
 }
 #carousel-row{
     padding-top:0;
@@ -92,7 +96,8 @@ h1{
     overflow-y: scroll;
 }
 #progression-div{
-    /* position: absolute; */
+    margin-top:2em;
+    /* positionem;: absolute; */
     overflow: scroll;    
     max-height: 0%;
     /* display:inline-block; */
@@ -100,7 +105,7 @@ h1{
 
 #progression-chords{
     overflow-y:scroll;
-    height:250px;
+    /* height:250px; */
 }
 .chord-button{
     background: none;
