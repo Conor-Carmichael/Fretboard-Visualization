@@ -4,6 +4,7 @@ var totalJSON;
 var showing_numerals = false;
 var current_scale=null;
 var stop=false;
+current_progression= new Array(4);
 
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
 
@@ -61,7 +62,8 @@ $(document).ready(function(){
     });  
 
     $("#play").on('click',function(){
-        highlightMetronome().promise();
+        highlightMetronome();
+        highlightNotes()
     });
     $("#pause").on('click',function(){
         stop = true;
@@ -74,6 +76,7 @@ $(document).ready(function(){
                 location.reload();
         }
         else{
+            current_progression=new Array(4);
             dehighlight();
             clearBoard();
             clearProgression();
@@ -173,6 +176,12 @@ function highlight(notes){
 
 function addToProgression(notes){
     addSharps(notes)
+    var a = notes.split(": ");
+    var a1 = a[1].split(",");
+    current_progression.concat([a1]);
+    alert(current_progression);
+    // alert(current_scale)
+    
     $("#progression-chords").append("<li class='list-group-item'>"+notes+"</li>");
 }
 
@@ -215,55 +224,66 @@ function outputUpdate(bpm){
     metronomeApp.setTempo(Number(bpm))
 }
 
-function highlightMetronome(d){
+function highlightNotes(progression){
+    var tempo = Number($("#set-bpm").val());
+    var ms = (1/ (tempo/60))* 1000;
+    dehighlight();
+    showNote(progression[0]).delay(ms*4);
+    showNote(progression[1]).delay(ms*4);
+    showNote(progression[2]).delay(ms*4);
+    showNote(progression[3]).delay(ms*4);
+    highlightNotes(progression);
+}
+
+function highlightMetronome(){
     if(!stop){
 
-    var tempo = Number($("#set-bpm").val());
-    
-    var ms = (1/ (tempo/60))* 1000;
-    // alert(ms)
+        var tempo = Number($("#set-bpm").val());
+        
+        var ms = (1/ (tempo/60))* 1000;
+        // alert(ms)
 
-    $("#metr-square-1").animate({
-        backgroundColor:'red',
-        height:"+=4",
-        width:"+=4"
-    },0.5*ms).animate({
-        backgroundColor:'white',
-        height:"-=4",
-        width:"-=4"
-    },0.5*ms);
-    
-    $("#metr-square-2").delay(ms).animate({
-        backgroundColor:'red',
-        height:"+=4",
-        width:"+=4"
-    },0.5*ms).animate({
-        backgroundColor:'white',
-        height:"-=4",
-        width:"-=4"
-    },0.5*ms);
+        $("#metr-square-1").animate({
+            backgroundColor:'red',
+            height:"+=4",
+            width:"+=4"
+        },0.5*ms).animate({
+            backgroundColor:'white',
+            height:"-=4",
+            width:"-=4"
+        },0.5*ms);
+        
+        $("#metr-square-2").delay(ms).animate({
+            backgroundColor:'red',
+            height:"+=4",
+            width:"+=4"
+        },0.5*ms).animate({
+            backgroundColor:'white',
+            height:"-=4",
+            width:"-=4"
+        },0.5*ms);
 
-    $("#metr-square-3").delay(2*ms).animate({
-        backgroundColor:'red',
-        height:"+=4",
-        width:"+=4"
-    },0.5*ms).animate({
-        backgroundColor:'white',
-        height:"-=4",
-        width:"-=4"
-    },0.5*ms);
-    
-    $("#metr-square-4").delay(3*ms).animate({
-        backgroundColor:'red',
-        height:"+=4",
-        width:"+=4"
-    },0.5*ms).animate({
-        backgroundColor:'white',
-        height:"-=4",
-        width:"-=4"
-    },0.5*ms, function(){
-        highlightMetronome()
-    });
+        $("#metr-square-3").delay(2*ms).animate({
+            backgroundColor:'red',
+            height:"+=4",
+            width:"+=4"
+        },0.5*ms).animate({
+            backgroundColor:'white',
+            height:"-=4",
+            width:"-=4"
+        },0.5*ms);
+        
+        $("#metr-square-4").delay(3*ms).animate({
+            backgroundColor:'red',
+            height:"+=4",
+            width:"+=4"
+        },0.5*ms).animate({
+            backgroundColor:'white',
+            height:"-=4",
+            width:"-=4"
+        },0.5*ms, function(){
+            highlightMetronome()
+        });
     }
     else{
         stop=false;
