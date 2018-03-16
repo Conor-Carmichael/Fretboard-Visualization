@@ -4,7 +4,7 @@ var totalJSON;
 var showing_numerals = false;
 var current_scale=null;
 var stop=false;
-current_progression= new Array(4);
+var current_progression= new LinkedList(0,null,null);
 var prog_count=0;
 var metronomeSoundOne = new Audio("./Assets/Ping Hi.wav");
 var metronomeSoundTwo = new Audio("./Assets/Ping Low.wav");
@@ -70,10 +70,10 @@ $(document).ready(function(){
 
     $("#play").on('click',function(){
         highlightMetronome();
-        highlightNotes()
     });
     $("#pause").on('click',function(){
         stop = true;
+        dehighlight();
     });
     
 
@@ -183,15 +183,18 @@ function highlight(notes){
     }
 }
 
-// function addArrays(){
-    
-//     return ret;
-// }
+
 
 function addToProgression(notes){
-    addSharps(notes)
-    // var a = notes.split(": ");
-    // var a1 = a[1].split(",");
+    // addSharps(notes)
+    var a = notes.split(": ");
+    var a1 = a[1].split(",");
+    var arr = new Array();
+    for (var i=0;i<a1.length;i++){
+        arr.push(a1[i])
+    }
+    var n = new Node(arr, null);
+    current_progression.add(n);    
     // var x=[]
     // for(x in a1){
     //     x
@@ -242,25 +245,27 @@ function outputUpdate(bpm){
     metronomeApp.setTempo(Number(bpm))
 }
 
-function highlightNotes(progression){
-    var tempo = Number($("#set-bpm").val());
-    var ms = (1/ (tempo/60))* 1000;
-    dehighlight();
-    showNote(progression[0]).delay(ms*4);
-    showNote(progression[1]).delay(ms*4);
-    showNote(progression[2]).delay(ms*4);
-    showNote(progression[3]).delay(ms*4);
-    highlightNotes(progression);
-}
+// function highlightNotes(progression){
+//     var tempo = Number($("#set-bpm").val());
+//     var ms = (1/ (tempo/60))* 1000;
+    
+
+//     highlight(tempList);
+// }
 
 function highlightMetronome(){
     if(!stop){
-
         var tempo = Number($("#set-bpm").val());
         
         var ms = (1/ (tempo/60))* 1000;
         // alert(ms)
         metronomeSoundOne.play();
+        dehighlight();
+        var temp = current_progression.removeHead();
+        // alert(temp.getData())
+        highlight(temp.getData());
+        current_progression.add(temp);
+
         $("#metr-square-1").animate({
             backgroundColor:'red',
             height:"+=4",
