@@ -198,7 +198,7 @@ function addToProgression(notes){
     // // var temp = addArrays(current_progression, a1);
     // current_progression[prog_count++] = a1;
     // alert(current_progression);
-    $("#progression-chords").append("<li class='list-group-item'>"+notes+"</li>");
+    $("#progression-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+notes+"</button></li>");
 }
 
 

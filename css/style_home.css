@@ -97,7 +97,7 @@ h2{
     overflow-y: scroll;
 }
 #progression-div{
-    margin-top:2em;
+    margin-top:1.8em;
     /* positionem;: absolute; */
     overflow: scroll;    
     max-height: 0%;
