@@ -1,3 +1,10 @@
+/**
+ * These are the global variables for this file. Includes audo variables, roman numerals, boolean checks for features, and progression linked list
+ * 
+ * First is the on document ready functions, then all supporting functions. Bottom is metronome related.
+ */
+//TODO Seperate files based on logic, make file for variables, clean formatting.
+
 var bebop;
 var blues;
 var totalJSON;
@@ -8,15 +15,16 @@ var current_progression= new LinkedList(0,null,null);
 var prog_count=0;
 var metronomeSoundOne = new Audio("./Assets/Ping Hi.wav");
 var metronomeSoundTwo = new Audio("./Assets/Ping Low.wav");
-
-// for (var i=0;i<4;i++){
-//     current_progression[i];
-// }
-
+var just_chords=false;
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
+
+
+
 
 $(document).ready(function(){   
     $("[data-toggle='tooltip']").tooltip();
+    $("#just-chords").prop('checked', false);
+    just_chords=false;
 
     $('#rn').click(function(){
         if(showing_numerals){
@@ -68,15 +76,27 @@ $(document).ready(function(){
 
     });  
 
+    
+    $("#just-chord").click(function () {
+        if(just_chords){
+            just_chords=false;
+        }        
+        just_chords=true;
+    });
+
+    //play the loop
     $("#play").on('click',function(){
         highlightMetronome();
     });
+
+    //pause the loop
     $("#pause").on('click',function(){
         stop = true;
         dehighlight();
     });
     
 
+    //clears board if ok
     $("#clearBoard").click(function(){
         if(showing_numerals){
             if(confirm("Must reload page to restore notes, remove numerals. Continue?"))
@@ -94,7 +114,7 @@ $(document).ready(function(){
     });    
 });// END DOC READY
 
-
+//sets up chord string to be presented on carousel
 function formattedStr(str){
     str= str.replace("Chord", "");
     str = str.replace(/[_]/g, " ");
@@ -102,6 +122,8 @@ function formattedStr(str){
     return str;
 }
 
+
+//appends the list of chords in the scale to the appropriate carousel location
 function showChords(){
     var n;
     totalJSON.scale.forEach(function(note){
@@ -119,19 +141,16 @@ function showChords(){
     });    
 }
 
+
+// adds scale name root, and actual scale to top left
 function addHeading(scale, root, mode){
     $('h2').text(root+" "+mode+":");
     addSharps(scale)
     $('#scalePara').text(scale.toString());
 }
-function appendKeys(chordObj){
-    for(var i=0;i<Object.keys(chordObj).length; i++){
-        $('#chordsInScale').append("<li class='chordFromScale' id='"+chordObj[index_list[String(i)]]+"'>"+index_list[String(i)]+": "+chordObj[index_list[String(i)]]+"</li>");
-//        $('#currentProgression').append("<li>"+index_list[String(i)]+": "+chordObj[index_list[String(i)]]+"</li>");
 
-    }
-}   
 
+//resets freboard to base
 function clearBoard(){
     current_scale=null;
     showing_numerals=false;
@@ -156,14 +175,16 @@ function clearBoard(){
     $('.B').css({'background':'#211f1d'});
 }
 
+//clear the progression list but append back the ui pieces
 function clearProgression(){
     $("#progression-chords").empty();
     $("#progression-chords").append("<li class='list-group-item active'>Your Chord Progression</li>");
-    $('#currentProgression').append('<li class="list-group-item active"><button id="clear-chord-progression" onclick="clearProgression()"\
+    $('#progression-chords').append('<li class="list-group-item active"><button id="clear-chord-progression" onclick="clearProgression()"\
     class="btn" style="padding:0px;float:top;background-color:#9D002C;color:white">Remove Progression</button></li>');
 }
 
 
+//removes highlighting, normal colors applied
 function dehighlight(){
     removeSharps(notes_arr);
     for(var i=0;i<notes_arr.length;i++){
@@ -172,6 +193,7 @@ function dehighlight(){
     }
 }
 
+//highlights specific chord red and root white
 function highlight(notes){
     for(var i=0;i<notes.length;i++){
         if (i===0){
@@ -184,7 +206,7 @@ function highlight(notes){
 }
 
 
-
+// adds chord to a linked list, then adds the chord to ui
 function addToProgression(notes){
     // addSharps(notes)
     var a = notes.split(": ");
@@ -193,20 +215,13 @@ function addToProgression(notes){
     for (var i=0;i<a1.length;i++){
         arr.push(a1[i])
     }
-    var n = new Node(arr, null);
+    var n = new Node(arr, null, a[0]   );
     current_progression.add(n);    
-    // var x=[]
-    // for(x in a1){
-    //     x
-    // }
-    // // alert(Array.isArray(a1))   
-    // // var temp = addArrays(current_progression, a1);
-    // current_progression[prog_count++] = a1;
-    // alert(current_progression);
+
     $("#progression-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+notes+"</button></li>");
 }
 
-
+//show the notes in notes on fretboard (used for scale)
 function showNote(notes){
     for(var i=0;i<notes.length;i++){
         $('.'+notes[i]+'').animate({opacity:1});
@@ -219,6 +234,7 @@ function showNote(notes){
     }
 }
 
+//show the roman numeral associated with the scale
 function showNumerals(notes){
     for(var i=0;i<notes.length;i++){
         $('.'+notes[i]+'').animate({opacity:1});
@@ -227,43 +243,66 @@ function showNumerals(notes){
     }
 }
 
-
+// from symbol to word sharp
 function removeSharps(arr_){
     for(var c=0;c<arr_.length;c++){
         arr_[c]=arr_[c].replace(/#/g, "sharp");
     }
 }
 
+
+//go from the word sharp to symbol #
 function addSharps(arr_){
     for(var c=0;c<arr_.length;c++){
         arr_[c]=arr_[c].replace(/[Ss]harp/g, "#");
     }
 }
 
+//shows what the slider value is on screen
 function outputUpdate(bpm){
     $("#bpmOutput").text(bpm);
     metronomeApp.setTempo(Number(bpm))
 }
 
-// function highlightNotes(progression){
-//     var tempo = Number($("#set-bpm").val());
-//     var ms = (1/ (tempo/60))* 1000;
-    
+//sets all notes to transparent, so that only one chord shows
+function setAllTransparent(){
+    removeSharps(notes_arr);
+    for(var i=0;i<notes_arr.length;i++){
+        $('.'+notes_arr[i]+'').css({'opacity':'0'});
+        $('.'+notes_arr[i]+'').css({'color':'white'});
+    }
+}
 
-//     highlight(tempList);
-// }
+
+// sets the paragraph for the chord in the progression currently
+function showCurrentChord(descr,notes) {
+    $("#curr-chord").text(descr+" "+notes.toString());
+}
 
 function highlightMetronome(){
     if(!stop){
         var tempo = Number($("#set-bpm").val());
-        
+        //get bpm to bpms
         var ms = (1/ (tempo/60))* 1000;
         // alert(ms)
         metronomeSoundOne.play();
         dehighlight();
+        
+
         var temp = current_progression.removeHead();
         // alert(temp.getData())
-        highlight(temp.getData());
+        //dont show all notes jsut notes in chord if desird
+        if(just_chords){
+            setAllTransparent();
+            showNote(temp.getData());
+        }
+        else{
+            highlight(temp.getData());
+        }
+
+        //show the chord and associated notes on top right
+        showCurrentChord(temp.getDescr(), temp.getData().toString());
+        //add the chord back to loop it
         current_progression.add(temp);
 
         $("#metr-square-1").animate({

@@ -122,6 +122,11 @@
                     <button class="btn" onclick="metronomeApp.toggle()" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
                     <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
                 </span>
+                    
+                    <label style="font-size:12px;"><input type="checkbox" id="just-chord">Check to only show chord in loop.</label>
+
+                
+
                 
             </span>
         </div>
@@ -132,7 +137,6 @@
                 <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
                 <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
             <span>
-            
         </div>
         
                     
@@ -142,7 +146,8 @@
                 <li class="list-inline-item metronome-ind"id="metr-square-2"></li>
                 <li class="list-inline-item metronome-ind" id="metr-square-3"></li>
                 <li class="list-inline-item metronome-ind" id="metr-square-4"></li>
-            </ul>
+            </ul>  
+            <p id="curr-chord"></p>
             
         </div>
     </div>
