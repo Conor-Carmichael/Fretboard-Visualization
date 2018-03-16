@@ -268,7 +268,6 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
-        metronomeSoundTwo.play();
         $("#metr-square-2").delay(ms).animate({
             backgroundColor:'red',
             height:"+=4",
@@ -278,7 +277,6 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
-        metronomeSoundTwo.play();
 
         $("#metr-square-3").delay(2*ms).animate({
             backgroundColor:'red',
@@ -289,7 +287,6 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms);
-        metronomeSoundTwo.play();
 
         $("#metr-square-4").delay(3*ms).animate({
             backgroundColor:'red',
@@ -300,6 +297,7 @@ function highlightMetronome(){
             height:"-=4",
             width:"-=4"
         },0.5*ms, function(){
+            
             highlightMetronome()
         });
     }
