@@ -263,7 +263,7 @@ function highlightMetronome(){
             backgroundColor:'red',
             height:"+=4",
             width:"+=4"
-        },0.5*ms).animate({
+        },0.2*ms).animate({
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
@@ -272,31 +272,31 @@ function highlightMetronome(){
             backgroundColor:'red',
             height:"+=4",
             width:"+=4"
-        },0.5*ms).animate({
+        },0.2*ms).animate({
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.5*ms);
+        },0.8*ms);
 
         $("#metr-square-3").delay(2*ms).animate({
             backgroundColor:'red',
             height:"+=4",
             width:"+=4"
-        },0.5*ms).animate({
+        },0.2*ms).animate({
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.5*ms);
+        },0.8*ms);
 
         $("#metr-square-4").delay(3*ms).animate({
             backgroundColor:'red',
             height:"+=4",
             width:"+=4"
-        },0.5*ms).animate({
+        },0.2*ms).animate({
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.5*ms, function(){
+        },0.8*ms, function(){
             
             highlightMetronome()
         });
