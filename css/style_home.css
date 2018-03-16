@@ -99,7 +99,7 @@ h2{
 #progression-div{
     margin-top:1.8em;
     /* positionem;: absolute; */
-    overflow: scroll;    
+    /* overflow: scroll;         */
     max-height: 0%;
     /* display:inline-block; */
 }
@@ -116,6 +116,10 @@ h2{
     font: inherit;
     cursor: pointer;
     outline: inherit;
+}
+
+.chord{
+    float: center;
 }
 
 .metronome-ind{

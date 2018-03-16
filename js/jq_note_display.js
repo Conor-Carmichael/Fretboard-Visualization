@@ -86,6 +86,8 @@ $(document).ready(function(){
             current_progression=new Array(4);
             dehighlight();
             clearBoard();
+            addHeading("","",  "Choose a Scale")
+
             clearProgression();
         }
         
@@ -96,6 +98,7 @@ $(document).ready(function(){
 function formattedStr(str){
     str= str.replace("Chord", "");
     str = str.replace(/[_]/g, " ");
+    str = str.replace(/[Ss]harp/g, "# ");
     return str;
 }
 
@@ -104,7 +107,8 @@ function showChords(){
     totalJSON.scale.forEach(function(note){
         n=note.toString();
         for (chord in totalJSON.basic[n]){
-            $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.basic[note][chord]+"</button></li>")
+            addSharps(totalJSON.basic[note][chord])
+            $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+formattedStr(note)+" "+formattedStr(chord)+": "+totalJSON.basic[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.inter[n]){
             $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.inter[note][chord]+"</button></li>")
@@ -128,9 +132,6 @@ function appendKeys(chordObj){
     }
 }   
 
-
-
-
 function clearBoard(){
     current_scale=null;
     showing_numerals=false;
@@ -146,7 +147,6 @@ function clearBoard(){
         $('#intermediate-chords li:not(:first)').remove();
         $('#jazz-chords li:not(:first)').remove();
     }
-    $('#currentProgression').empty();
     $('h2').text("");
     $('#scalePara').text("");
     $('.E').css({'background':'#211f1d'});
@@ -158,7 +158,9 @@ function clearBoard(){
 
 function clearProgression(){
     $("#progression-chords").empty();
-    $("#progression-chords").append("<li class='list-group-item active'>Your Chord Progression</li>")
+    $("#progression-chords").append("<li class='list-group-item active'>Your Chord Progression</li>");
+    $('#currentProgression').append('<li class="list-group-item active"><button id="clear-chord-progression" onclick="clearProgression()"\
+    class="btn" style="padding:0px;float:top;background-color:#9D002C;color:white">Remove Progression</button></li>');
 }
 
 
@@ -231,7 +233,7 @@ function removeSharps(arr_){
 
 function addSharps(arr_){
     for(var c=0;c<arr_.length;c++){
-        arr_[c]=arr_[c].replace(/sharp/g, "#");
+        arr_[c]=arr_[c].replace(/[Ss]harp/g, "#");
     }
 }
 
