@@ -23,8 +23,18 @@ roman_numerals = ["I","II","III","IV","V","VI","VII"]
 
 $(document).ready(function(){   
     $("[data-toggle='tooltip']").tooltip();
-    $("#just-chords").prop('checked', false);
-    just_chords=false;
+
+    $("#just-chord").click(function(){
+        just_chords=!just_chords;
+        if(just_chords){
+            $("#just-chord").css({"background-color":"green"})
+        }
+        else{
+            $("#just-chord").css({"background-color":"#9D002C"})
+        }
+        
+        
+    });
 
     $('#rn').click(function(){
         if(showing_numerals){
@@ -133,10 +143,12 @@ function showChords(){
             $("#basic-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+formattedStr(note)+" "+formattedStr(chord)+": "+totalJSON.basic[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.inter[n]){
-            $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.inter[note][chord]+"</button></li>")
+            addSharps(totalJSON.inter[note][chord])
+            $("#intermediate-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+formattedStr(note)+" "+formattedStr(chord)+": "+totalJSON.inter[note][chord]+"</button></li>")
         }
         for (chord in totalJSON.jazz[n]){
-            $("#jazz-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+note+" "+formattedStr(chord)+": "+totalJSON.jazz[note][chord]+"</button></li>")
+            addSharps(totalJSON.jazz[note][chord]);
+            $("#jazz-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+formattedStr(note)+" "+formattedStr(chord)+": "+totalJSON.jazz[note][chord]+"</button></li>")
         }
     });    
 }
@@ -197,10 +209,10 @@ function dehighlight(){
 function highlight(notes){
     for(var i=0;i<notes.length;i++){
         if (i===0){
-            $('.'+notes[i]+'').css({'background':'white'});
-            $('.'+notes[i]+'').css({'color':'black'});
+            $('.'+notes[i].replace("#","sharp"+'')).css({'background':'white'});
+            $('.'+notes[i].replace("#","sharp"+'')).css({'color':'black'});
         }else{
-            $('.'+notes[i]+'').css({'background':'#9D002C'});
+            $('.'+notes[i].replace("#","sharp"+'')).css({'background':'#9D002C'});
         }    
     }
 }
@@ -224,8 +236,8 @@ function addToProgression(notes){
 //show the notes in notes on fretboard (used for scale)
 function showNote(notes){
     for(var i=0;i<notes.length;i++){
-        $('.'+notes[i]+'').animate({opacity:1});
-        $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
+        $('.'+notes[i].replace("#","sharp")+'').animate({opacity:1});
+        $('.'+notes[i].replace("#","sharp")+'').css({'background':'rgba(220, 183, 36,1)'});
         if(showing_numerals){
             var temp = notes.slice()
             addSharps(temp)
@@ -284,13 +296,11 @@ function highlightMetronome(){
         var tempo = Number($("#set-bpm").val());
         //get bpm to bpms
         var ms = (1/ (tempo/60))* 1000;
-        // alert(ms)
         metronomeSoundOne.play();
         dehighlight();
         
 
         var temp = current_progression.removeHead();
-        // alert(temp.getData())
         //dont show all notes jsut notes in chord if desird
         if(just_chords){
             setAllTransparent();
