@@ -28,6 +28,18 @@ class Node{
         return this.next;
     }
 
-
+    equalData(node){
+        if(this.getData().length !== node.getData().length){
+            return false;
+        }
+        else{
+            for(var i=0;i<this.getData().length; i++){
+                if(this.getData()[i] !== node.getData()[i] ){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 
 }

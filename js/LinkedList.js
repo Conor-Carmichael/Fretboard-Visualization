@@ -40,6 +40,40 @@ class LinkedList{
         
     }
 
+    contains(node){
+        var t = this.head;
+        while(t !== null){
+            if(t.equalData(node)){
+                return true;
+            }
+            t = t.getNext()
+        }
+        return false;
+    }
+
+
+    /**
+     * 
+     * x -> y -> z -> null
+     * 
+     */
+
+    removeNode(node){
+        var t = this.head;
+        var p = null;
+        while( t!==null &&  t.getData() !== node.getData()){
+            console.log(t.getData()+"  ,  "+node.getData());
+            p = t;
+            t=t.getNext();
+        }
+        var temp =t.getNext();
+        p.setNext(temp)
+        t.setNext(null);
+        t = null;
+        return 0;
+    }
+       
+
     length(){
         return this.length;
     }

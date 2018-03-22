@@ -84,20 +84,31 @@ $(document).ready(function(){
     });  
     $(document).on('dblclick','.chord',function(){
         var notes = $(this).text();
+        var n = createNode(notes);
         addToProgression(notes);
+        // current_progression.add(n);
+        // console.log(current_progression.contains(n));
+        // if(current_progression.length<1 || !current_progression.contains(n)) {
+        //     addToProgression(n);
+        // }
+        // else{
+        //     console.log("Entered else statement.")
+        //     clearProgression();
+        //     var t = current_progression.head;
+        //     while (t!==null){
+        //         addToProgression(t.getDescr());
+        //         t=t.getNext();
+        //     }
+        // }
+        
 
     });  
 
-    
-    $("#just-chord").click(function () {
-        if(just_chords){
-            just_chords=false;
-        }        
-        just_chords=true;
-    });
-
     //play the loop
     $("#play").on('click',function(){
+        if(current_progression.length <1){
+            alert("You must create a progression first! Double click on chords to add them to your progression.")
+        }
         highlightMetronome();
     });
 
@@ -105,6 +116,7 @@ $(document).ready(function(){
     $("#pause").on('click',function(){
         stop = true;
         dehighlight();
+        showCurrentChord("","");    
     });
     
 
@@ -115,11 +127,11 @@ $(document).ready(function(){
                 location.reload();
         }
         else{
-            current_progression=new Array(4);
             dehighlight();
             clearBoard();
             addHeading("","",  "Choose a Scale")
-
+            current_progression = new LinkedList(0,null,null);
+            showCurrentChord("","");
             clearProgression();
         }
         
@@ -220,9 +232,7 @@ function highlight(notes){
     }
 }
 
-
-// adds chord to a linked list, then adds the chord to ui
-function addToProgression(notes){
+function createNode(notes){
     // addSharps(notes)
     var a = notes.split(": ");
     var a1 = a[1].split(",");
@@ -230,8 +240,15 @@ function addToProgression(notes){
     for (var i=0;i<a1.length;i++){
         arr.push(a1[i])
     }
-    var n = new Node(arr, null, a[0]   );
-    current_progression.add(n);    
+    var n = new Node(arr, null, a[0]);
+    return n;
+}
+
+
+// adds chord to a linked list, then adds the chord to ui
+function addToProgression(notes){
+    var node = createNode(notes);
+    current_progression.add(node);    
 
     $("#progression-chords").append("<li class='list-group-item chord'><button class='chord-button'>"+notes+"</button></li>");
 }
@@ -294,6 +311,8 @@ function showCurrentChord(descr,notes) {
     $("#curr-chord").text(descr+" "+notes.toString());
 }
 
+
+
 function highlightMetronome(){
     if(!stop){
         var tempo = Number($("#set-bpm").val());
@@ -310,6 +329,7 @@ function highlightMetronome(){
             showNote(temp.getData());
         }
         else{
+            showNote(current_scale);
             highlight(temp.getData());
         }
 
