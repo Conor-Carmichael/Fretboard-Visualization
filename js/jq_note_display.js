@@ -169,6 +169,7 @@ function clearBoard(){
     current_scale=null;
     showing_numerals=false;
     color_counter=0;
+    dehighlight();
     $('#lowestring li').animate({opacity:0});
     $('#astring li').animate({opacity:0});
     $('#dstring li').animate({opacity:0});
