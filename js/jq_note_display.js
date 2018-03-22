@@ -119,6 +119,10 @@ $(document).ready(function(){
         showCurrentChord("","");    
     });
     
+    $("#clear-chord-progression").click(function(){
+        current_progression = new LinkedList(0,null,null);
+        clearProgression();
+    });
 
     //clears board if ok
     $("#clearBoard").click(function(){
