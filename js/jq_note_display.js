@@ -5,6 +5,8 @@
  */
 //TODO Seperate files based on logic, make file for variables, clean formatting.
 
+//TODO: make sure all notes go back to white text on refresh etc
+
 var bebop;
 var blues;
 var totalJSON;
@@ -323,7 +325,9 @@ function highlightMetronome(){
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.5*ms);
+        },0.8*ms,function(){
+            metronomeSoundTwo.play();
+        });
         $("#metr-square-2").delay(ms).animate({
             backgroundColor:'red',
             height:"+=4",
@@ -332,8 +336,10 @@ function highlightMetronome(){
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.8*ms);
-
+        },0.8*ms,function(){
+            metronomeSoundTwo.play();
+        });
+        // metronomeSoundOne.play();
         $("#metr-square-3").delay(2*ms).animate({
             backgroundColor:'red',
             height:"+=4",
@@ -342,7 +348,9 @@ function highlightMetronome(){
             backgroundColor:'white',
             height:"-=4",
             width:"-=4"
-        },0.8*ms);
+        },0.8*ms,function(){
+            metronomeSoundTwo.play();
+        });
 
         $("#metr-square-4").delay(3*ms).animate({
             backgroundColor:'red',

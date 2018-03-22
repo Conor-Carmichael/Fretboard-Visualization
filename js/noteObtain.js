@@ -2,7 +2,7 @@
 var whole_step  = 2;
 var half_step   = 1;
 
-var notes_arr = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+var notes_arr = [ 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 var modes = ['MAJOR', 'DORIAN', 'PHRYGIAN', 'LYDIAN', 'MIXOLYDIAN', 'MINOR', 'LOCRIAN'];
 
 //patterns for Ionian {modes derived from this}
@@ -182,14 +182,20 @@ var intermediate_chord_functions = {
         return [notes[0], notes[4], notes[7], notes[2]] 
     }
 }
-var jazz_function_names=["Major7thChord"]
+var jazz_function_names=["Major7thChord", "Minor7thChord", "Minor9thChord", "Dominant9thChord"]
 var jazz_chord_functions = {
     Major7thChord : function(notes){
         return [notes[0],notes[4],notes[7], notes[9]];
+    },
+    Minor7thChord : function(notes){
+        return [notes[0],notes[3],notes[7], notes[10]];
+    },
+    Minor9thChord : function (notes) {
+        return [notes[0],notes[3],notes[7], notes[10], notes[9]];
+    },
+    Dominant9thChord : function(notes){
+        return [notes[0],notes[4],notes[7], notes[10], notes[2]];
     }
-    // Minor7thChord : function(notes){
-    //     return [notes[0],notes[4],notes[7], notes[9]];
-    // }
 }
 
 
