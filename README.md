@@ -1,6 +1,6 @@
 # Fretboard-Visualization
 A tool for guitar creation, and to aid with the learning of guitar theory
 
-**Currently I am reworking it to have bootstrap capabilities
+Still some bugs being worked out.
 
 Link: https://conor-carmichael.github.io/Fretboard-Visualization/
