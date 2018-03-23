@@ -58,7 +58,6 @@ h2{
 
 #main-div{
     position: absolute;
-    overflow-y: scroll;
 }
 #mainArticle{
     padding-right:350px;
@@ -93,9 +92,9 @@ h2{
     margin-right: 54px;
     color:white; 
 }
-#main-div{
+/* #main-div{
     overflow-y: scroll;
-}
+} */
 #progression-div{
     margin-top:1.8em;
     /* positionem;: absolute; */
@@ -104,10 +103,9 @@ h2{
     /* display:inline-block; */
 }
 
-#progression-chords{
-    overflow-y:scroll;
+/* #progression-chords{
     /* height:250px; */
-}
+/* }  */
 .chord-button{
     background: none;
     color: inherit;
