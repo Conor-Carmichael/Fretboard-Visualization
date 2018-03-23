@@ -52,9 +52,9 @@ h2{
     padding: 10px;
 }
 
-.col-sm-2{
+/* .col-sm-2{
     overflow-y: scroll;
-}
+} */
 
 #main-div{
     position: absolute;
