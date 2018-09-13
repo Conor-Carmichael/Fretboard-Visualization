@@ -5,7 +5,7 @@
     <!-- Latest js CDN's -->
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <!-- jQuery library -->
+    <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
             crossorigin="anonymous"></script>      
@@ -28,13 +28,13 @@
         <link rel="stylesheet" type="text/css" href="./css/style_home.css">
         <link rel="stylesheet" type="text/css" href="./css/style_fretboard.css">
 
-        <title>Music MeetUp</title>
+        <title>Fret Viz</title>
         
     </head>
     
 	<body>
     <embed src="High Seiko SQ50.wav" autostart="false" width="0" height="0" id="metronome-sound"  enablejavascript="true">
-    <div class='row'>
+    <div class='row' id="header" style="margin-bottom:1.5em">
         <div class="col-sm-6 col-sm-offset-4">
             <h1>Fretboard Visualization</h1>
         </div>
@@ -43,7 +43,14 @@
             
 <!-- Displays the key selections tools, roman numeral option and generate and clear-->
 
-    <div class="row">
+
+<div class="row">
+        <div class="col-sm-2 col-sm-offset-2">
+            <h2 >Choose a Scale</h2>
+        </div>
+
+    </div>
+    <div class="row" style="margin:2em">
         <article id="chordSetUp">
             <!-- root note -->
             <div class="form-group col-sm-2 col-sm-offset-2">
@@ -65,7 +72,7 @@
             </div>
             <!-- mode/scale -->
             <div class="form-group col-sm-2">
-                    <label for="modes" style="font-size:20px">Select a mode:</label>
+                    <label for="modes" style="font-size:20px">Select a mode/scale:</label>
                     <select class="form-control" name="modes" id="modes">
                         <option value="MAJOR">Major</option>
                         <option value="DORIAN">Dorian</option>
@@ -83,24 +90,20 @@
         <!--<input type="checkbox" name="BEBOP" value="BEBOP">Bebop&emsp;&emsp;-->
         <!--<input type="checkbox" name="BLUES" value="BLUES">Blues Note<br>-->
 
-        <!-- Roman Numeral switch -->
-        <div class="col-sm-1">
-            <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals aren't reliable for Major/Minor pentatonic combination." >Roman Numerals *</label>
-            <button class="btn btn-info" id="rn">I,II..</button>      
-        </div>
+
 
         <!-- Submit and clear functionality -->
         <div class="col-sm-1">
             <label for="modeAndNoteSubmit">Generate Fretboard!</label>                    
             <button type="button" class="btn btn-success"  id="modeAndNoteSubmit">
-                <span class="glyphicon glyphicon-music"></span> Go!
+                <span class="glyphicon glyphicon-music"></span>
             </button>            
         </div>               
         <div class="col-sm-1">
             <label for="modeAndNoteSubmit">Clear Fretboard!</label>
                     
             <button type="button" class="btn btn-warning"  id="clearBoard">
-                <span class="glyphicon glyphicon-refresh"></span> Go!
+                <span class="glyphicon glyphicon-refresh"></span>
             </button>            
         </div>        
         <!-- <div class="col-sm-1">
@@ -110,60 +113,22 @@
         </article>
     </div>
 
+    <div class="row">
+        <div class="col-sm-offset-2    col-sm-3">    
+            <h2 id="currentScale"></h2>
 
-<!-- Shows the details of the scale, and metronome options. -->
-    
-    <div id="scale-details" class="row" >
-        <div class="col-sm-2 col-sm-offset-2" >
-            <h2>Choose a Scale</h2>
             <p id="scalePara"></p>
-        </div>
-
-        <div class="col-sm-2">
-            <span>
-                <label for="chords">Play Chords</label>
-                <span id="controls">
-                    <button class="btn" onclick="metronomeApp.toggle()" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
-                    <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
-                </span>
-                    
-                    <button class="btn" id="just-chord" style="background-color:#9D002C; background-opacity:.2; border:thin, white;margin-top:4px;">Click to only show chord in loop.</button>
-
-                
-
-                
-            </span>
-        </div>
-        <!-- Setting BPM -->
-        <div class="col-sm-1">
-            <span id="bpm-span">
-                <!-- <input type="text" min="50" max="150"> -->
-                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
-                <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
-            <span>
-        </div>
-        
-                    
-        <div class="col-sm-3">
-            <ul class="list-inline">
-                <li class="list-inline-item metronome-ind" id="metr-square-1"></li>
-                <li class="list-inline-item metronome-ind"id="metr-square-2"></li>
-                <li class="list-inline-item metronome-ind" id="metr-square-3"></li>
-                <li class="list-inline-item metronome-ind" id="metr-square-4"></li>
-            </ul>  
-            <p id="curr-chord"></p>
             
-        </div>
+        </div>  
     </div>
-    
        
 <!-- expand to see guitar html -->
     <div class="row" class="main-div" style="overflow:hidden">
         
         <div class="col-sm-7 col-sm-offset-2" style="padding-left:6em;">
-                <ul class="list-inline" style="padding-bottom:0px;">
+                <!-- <ul class="list-inline" style="padding-bottom:0px;"> -->
                         <!-- <li class="list-inline-item">Fret number:</li> -->
-                        <li class="list-inline-item">1</li>
+                        <!-- <li class="list-inline-item">1</li>
                         <li class="list-inline-item">2</li>
                         <li class="list-inline-item">3</li>
                         <li class="list-inline-item">4</li>
@@ -173,9 +138,9 @@
                         <li class="list-inline-item">8</li>
                         <li class="list-inline-item">9</li>
                         <li class="list-inline-item">10</li>
-                        <li class="list-inline-item">11</li>
+                        <li class="list-inline-item">11</li> -->
                         <!-- <li class="list-inline-item">12</li> -->
-                    </ul>
+                    <!-- </ul> -->
             <div class="guitar-neck">
 
             
@@ -362,6 +327,79 @@
         </div>
     </div> -->
 
+    <!-- <div id="piano">
+        
+    </div> -->
+
+    <div class="row" style="margin-top:2em;">
+        <div class="col-sm-4 col-sm-offset-2">
+            <h2>Control the Progression</h2>
+        </div>
+        <div class="col-sm-3 ">
+            <h2>Metronome</h2>
+        </div>
+    </div>
+    
+    
+    <!-- Shows the details of the scale, and metronome options. -->
+    <div class="row" style="margin:2em ;">
+        <div class="col-sm-1 col-sm-offset-2"  >
+            <span>
+                <label for="chords">Play Chords</label>
+                <span id="controls">
+                    <button class="btn" onclick="metronomeApp.toggle()" id="play"><span class="glyphicon glyphicon-play" style="color:green"></span></button>
+                    <button class="btn" id="pause"><span class="glyphicon glyphicon-pause" style="color:red"></span></button>
+                </span>
+            </span>
+        </div>
+        <!-- Show full scale or just the current chord -->
+        <div class="col-sm-1" style="margin-right:3em;">
+            <label for="just-chord">Show Chord or Chord&Scale</label>
+            <button class="btn btn-info" id="just-chord" >
+                Scale and Chord
+            </button>
+        </div>
+        <!-- Roman Numeral switch -->
+        <div class="col-sm-1">
+
+            <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals aren't reliable for Major/Minor pentatonic combination." >Roman Numerals *</label>
+            <button class="btn" style="background-color:#b9b9b9;" id="romanNumeralsBTN">I,II...</button>      
+        </div>
+        <!-- Setting BPM -->
+        <div class="col-sm-1">
+            <span id="bpm-span">
+                <!-- <input type="text" min="50" max="150"> -->
+                <label id="bpm-label" for="set-bpm">Set BPM:<output  for="set-bpm" style="color:white" id="bpmOutput">100</output></label>
+                <input id="set-bpm" type="range" name="bpm" min="50" max="150" oninput="outputUpdate(value)"></input>
+            <span>
+        </div>
+        
+                    
+        <div class="col-sm-3">
+            <p id="curr-chord" style="font-size:16px;"></p>
+            <ul class="list-inline">
+                <li class="list-inline-item metronome-ind" id="metr-square-1"></li>
+                <li class="list-inline-item metronome-ind"id="metr-square-2"></li>
+                <li class="list-inline-item metronome-ind" id="metr-square-3"></li>
+                <li class="list-inline-item metronome-ind" id="metr-square-4"></li>
+            </ul>  
+            
+            
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top:2em;">
+        <div class="col-sm-offset-2 col-sm-4">
+            <h2>Choose Your Chord Progression</h2>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-offset-4 col-sm-2"></div>
+        <p id="scalePara"></p>
+    </div>
     <div class="row" id="carousel-row">
         <!-- chord progression -->
         <div class="col-sm-3 col-sm-offset-2" id ="progression-div">

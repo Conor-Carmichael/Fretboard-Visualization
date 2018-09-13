@@ -23,10 +23,10 @@ h3 {
   display: inline-block;
     /* float: right; */
   position: relative;
-  margin-top: 0px;
+  margin-top: 2em;
   /* margin-left: 15%; */
   margin-right: 16px;
-
+  
   width: var(--widthofguitar);
   height: var(--heightofguitar);
   background: #241D00;

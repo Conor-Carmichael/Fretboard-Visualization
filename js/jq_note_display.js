@@ -18,6 +18,8 @@ var prog_count=0;
 var metronomeSoundOne = new Audio("./Assets/Ping Hi.wav");
 var metronomeSoundTwo = new Audio("./Assets/Ping Low.wav");
 var just_chords=false;
+var just_chord_string = "Just Chords";
+var chord_and_scale_string = "Scale and Chord"
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
 
 
@@ -29,32 +31,58 @@ $(document).ready(function(){
     $("#just-chord").click(function(){
         just_chords=!just_chords;
         if(just_chords){
-            $("#just-chord").css({"background-color":"green"})
+            $("#just-chord").text(just_chord_string)
         }
         else{
-            $("#just-chord").css({"background-color":"#9D002C"})
+            $("#just-chord").text(chord_and_scale_string)
+
         }
         
         
     });
 
-    $('#rn').click(function(){
+    $('#romanNumeralsBTN').click(function(){
         if(showing_numerals){
             showNote(current_scale);
             showing_numerals=false;
+            $("#romanNumeralsBTN").css({"background-color":"#b9b9b9"})
         }
         else if(current_scale !== null){
             showing_numerals=true;
             showNumerals(current_scale);
+            $("#romanNumeralsBTN").css({"background-color":"green"})
+        }
+        else{
+            alert("You need to generate a scale before showing the numeration of the scale.")
         }
          
     });
 
+    //clears board if ok
+    $("#clearBoard").click(function(){
+        if(showing_numerals){
+            showNote(current_scale);
+            showing_numerals=false;
+            $("#romanNumeralsBTN").css({"background-color":"#b9b9b9"})
+
+        }
+        
+        dehighlight();
+        clearBoard();
+        addHeading("","",  "Choose a Scale")
+        current_progression = new LinkedList(0,null,null);
+        showCurrentChord("","");
+        clearProgression();
+        
+        
+    });  
+
     $('#modeAndNoteSubmit').click(function(){
         if(showing_numerals){
-            alert("Must switch off roman numerals.");
+            showNote(current_scale);
+            showing_numerals=false;
         }
-        else{
+        
             clearBoard();
             var root = $('#notes').val();
             var scale_mode = $('#modes').val();
@@ -69,7 +97,7 @@ $(document).ready(function(){
 
             removeSharps(temp);
             showNote(temp);      
-        }
+        
           
     });
 
@@ -86,20 +114,21 @@ $(document).ready(function(){
         var notes = $(this).text();
         var n = createNode(notes);
         addToProgression(notes);
-        // current_progression.add(n);
-        // console.log(current_progression.contains(n));
-        // if(current_progression.length<1 || !current_progression.contains(n)) {
-        //     addToProgression(n);
-        // }
-        // else{
-        //     console.log("Entered else statement.")
-        //     clearProgression();
-        //     var t = current_progression.head;
-        //     while (t!==null){
-        //         addToProgression(t.getDescr());
-        //         t=t.getNext();
-        //     }
-        // }
+        //not sure what this is but i dont wanna delete yet
+       /* current_progression.add(n);
+        console.log(current_progression.contains(n));
+        if(current_progression.length<1 || !current_progression.contains(n)) {
+            addToProgression(n);
+        }
+        else{
+            console.log("Entered else statement.")
+            clearProgression();
+            var t = current_progression.head;
+            while (t!==null){
+                addToProgression(t.getDescr());
+                t=t.getNext();
+            }
+        }*/
         
 
     });  
@@ -124,22 +153,7 @@ $(document).ready(function(){
         clearProgression();
     });
 
-    //clears board if ok
-    $("#clearBoard").click(function(){
-        if(showing_numerals){
-            if(confirm("Must reload page to restore notes, remove numerals. Continue?"))
-                location.reload();
-        }
-        else{
-            dehighlight();
-            clearBoard();
-            addHeading("","",  "Choose a Scale")
-            current_progression = new LinkedList(0,null,null);
-            showCurrentChord("","");
-            clearProgression();
-        }
-        
-    });    
+  
 });// END DOC READY
 
 //sets up chord string to be presented on carousel
@@ -174,7 +188,7 @@ function showChords(){
 
 // adds scale name root, and actual scale to top left
 function addHeading(scale, root, mode){
-    $('h2').text(root+" "+mode+":");
+    $('#currentScale').text(root+" "+mode+":");
     addSharps(scale)
     $('#scalePara').text(scale.toString());
 }
@@ -197,7 +211,7 @@ function clearBoard(){
         $('#intermediate-chords li:not(:first)').remove();
         $('#jazz-chords li:not(:first)').remove();
     }
-    $('h2').text("");
+    $('currentScale').text("");
     $('#scalePara').text("");
     $('.E').css({'background':'#211f1d'});
     $('.A').css({'background':'#211f1d'});
