@@ -88,7 +88,6 @@ function create_chord_JSON(root,mode){
     var relative_notes = RotateNotesArr(notes_arr, root);
     var relative_pattern = ModePattern(mode);
     var curr_scale = GetScale(relative_notes, relative_pattern); 
-    
     var total_JSON = {
         scale:curr_scale,
         basic:{},

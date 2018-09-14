@@ -17,8 +17,6 @@
     <!--Scripts-->
         <script type="text/javascript" src="./js/LinkedList.js"></script>
         <script type="text/javascript" src="./js/Node.js"></script>
-        <script type="text/javascript" src="./js/Metronome/Metronome.js"></script>
-        <script type="text/javascript" src="./js/Metronome/MetronomeClass.js"></script>
         <script type="text/javascript" src="./js/noteObtain.js"></script>
         <script type="text/javascript" src="./js/jq_note_display.js"></script>
 
@@ -362,7 +360,7 @@
         <!-- Roman Numeral switch -->
         <div class="col-sm-1">
 
-            <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals aren't reliable for Major/Minor pentatonic combination." >Roman Numerals *</label>
+            <label data-toggle="tooltop" data-placement="bottom" title="Roman Numerals aren't reliable for Major/Minor pentatonic combination. Roman numerals currently dont work within progressions." >Roman Numerals *</label>
             <button class="btn" style="background-color:#b9b9b9;" id="romanNumeralsBTN">I,II...</button>      
         </div>
         <!-- Setting BPM -->
@@ -376,7 +374,7 @@
         
                     
         <div class="col-sm-3">
-            <p id="curr-chord" style="font-size:16px;"></p>
+            <p id="curr-chord" style=""></p>
             <ul class="list-inline">
                 <li class="list-inline-item metronome-ind" id="metr-square-1"></li>
                 <li class="list-inline-item metronome-ind"id="metr-square-2"></li>

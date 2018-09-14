@@ -13,6 +13,7 @@ var totalJSON;
 var showing_numerals = false;
 var current_scale=null;
 var stop=false;
+var playing = false;
 var current_progression= new LinkedList(0,null,null);
 var prog_count=0;
 var metronomeSoundOne = new Audio("./Assets/Ping Hi.wav");
@@ -21,7 +22,6 @@ var just_chords=false;
 var just_chord_string = "Just Chords";
 var chord_and_scale_string = "Scale and Chord"
 roman_numerals = ["I","II","III","IV","V","VI","VII"]
-
 
 
 
@@ -42,6 +42,7 @@ $(document).ready(function(){
     });
 
     $('#romanNumeralsBTN').click(function(){
+
         if(showing_numerals){
             showNote(current_scale);
             showing_numerals=false;
@@ -82,22 +83,22 @@ $(document).ready(function(){
             showNote(current_scale);
             showing_numerals=false;
         }
-        
-            clearBoard();
-            var root = $('#notes').val();
-            var scale_mode = $('#modes').val();
-            totalJSON =  create_chord_JSON(root, scale_mode);
-            showChords();
+    
+        clearBoard();
+        var root = $('#notes').val();
+        var scale_mode = $('#modes').val();
+        totalJSON =  create_chord_JSON(root, scale_mode);
+        showChords();
 
-            addHeading(totalJSON.scale, totalJSON.scale[0], scale_mode)
-            
-            // appendKeys(objTemp);
-            var temp = totalJSON.scale;
-            current_scale=temp;
-
-            removeSharps(temp);
-            showNote(temp);      
+        addHeading(totalJSON.scale, totalJSON.scale[0], scale_mode)
         
+        // appendKeys(objTemp);
+        var temp = totalJSON.scale;
+        current_scale=temp;
+
+        removeSharps(temp);
+        showNote(temp);      
+    
           
     });
 
@@ -135,6 +136,7 @@ $(document).ready(function(){
 
     //play the loop
     $("#play").on('click',function(){
+        playing = true;
         if(current_progression.length <1){
             alert("You must create a progression first! Double click on chords to add them to your progression.")
         }
@@ -143,6 +145,7 @@ $(document).ready(function(){
 
     //pause the loop
     $("#pause").on('click',function(){
+        playing = false;
         stop = true;
         dehighlight();
         showCurrentChord("","");    
@@ -167,8 +170,9 @@ function formattedStr(str){
 
 //appends the list of chords in the scale to the appropriate carousel location
 function showChords(){
-    var n;
+    var n;    
     totalJSON.scale.forEach(function(note){
+        
         n=note.toString();
         for (chord in totalJSON.basic[n]){
             addSharps(totalJSON.basic[note][chord])
@@ -188,7 +192,7 @@ function showChords(){
 
 // adds scale name root, and actual scale to top left
 function addHeading(scale, root, mode){
-    $('#currentScale').text(root+" "+mode+":");
+    $('#currentScale').text(root+" "+mode);
     addSharps(scale)
     $('#scalePara').text(scale.toString());
 }
@@ -236,6 +240,7 @@ function dehighlight(){
         $('.'+notes_arr[i]+'').css({'background':'rgba(220, 183, 36,1)'});
         $('.'+notes_arr[i]+'').css({'color':'white'});
     }
+    addSharps(notes_arr)
 }
 
 //highlights specific chord red and root white
@@ -277,7 +282,8 @@ function showNote(notes){
         $('.'+notes[i].replace("#","sharp")+'').animate({opacity:1});
         $('.'+notes[i].replace("#","sharp")+'').css({'background':'rgba(220, 183, 36,1)'});
         if(showing_numerals){
-            var temp = notes.slice()
+            var temp = notes.slice();
+            debugger;
             addSharps(temp)
             $('.'+notes[i]+"").text(temp[i]);
         }
@@ -287,9 +293,9 @@ function showNote(notes){
 //show the roman numeral associated with the scale
 function showNumerals(notes){
     for(var i=0;i<notes.length;i++){
-        $('.'+notes[i]+'').animate({opacity:1});
-        $('.'+notes[i]+'').css({'background':'rgba(220, 183, 36,1)'});
-        $('.'+notes[i]+"").text(roman_numerals[i]);
+        $('.'+notes[i].replace("#","sharp"+'')+'').animate({opacity:1});
+        $('.'+notes[i].replace("#","sharp"+'')+'').css({'background':'rgba(220, 183, 36,1)'});
+        $('.'+notes[i].replace("#","sharp"+'')+'').text(roman_numerals[i]);
     }
 }
 
@@ -311,7 +317,6 @@ function addSharps(arr_){
 //shows what the slider value is on screen
 function outputUpdate(bpm){
     $("#bpmOutput").text(bpm);
-    metronomeApp.setTempo(Number(bpm))
 }
 
 //sets all notes to transparent, so that only one chord shows
@@ -345,10 +350,13 @@ function highlightMetronome(){
         if(just_chords){
             setAllTransparent();
             showNote(temp.getData());
+
         }
         else{
             showNote(current_scale);
+    
             highlight(temp.getData());
+            
         }
 
         //show the chord and associated notes on top right
@@ -357,48 +365,32 @@ function highlightMetronome(){
         current_progression.add(temp);
 
         $("#metr-square-1").animate({
-            backgroundColor:'red',
-            height:"+=4",
-            width:"+=4"
+            backgroundColor:'red'
         },0.2*ms).animate({
-            backgroundColor:'white',
-            height:"-=4",
-            width:"-=4"
+            backgroundColor:'white'
         },0.8*ms,function(){
             metronomeSoundTwo.play();
         });
         $("#metr-square-2").delay(ms).animate({
-            backgroundColor:'red',
-            height:"+=4",
-            width:"+=4"
+            backgroundColor:'red'
         },0.2*ms).animate({
-            backgroundColor:'white',
-            height:"-=4",
-            width:"-=4"
+            backgroundColor:'white'
         },0.8*ms,function(){
             metronomeSoundTwo.play();
         });
         // metronomeSoundOne.play();
         $("#metr-square-3").delay(2*ms).animate({
-            backgroundColor:'red',
-            height:"+=4",
-            width:"+=4"
+            backgroundColor:'red'
         },0.2*ms).animate({
-            backgroundColor:'white',
-            height:"-=4",
-            width:"-=4"
+            backgroundColor:'white'
         },0.8*ms,function(){
             metronomeSoundTwo.play();
         });
 
         $("#metr-square-4").delay(3*ms).animate({
-            backgroundColor:'red',
-            height:"+=4",
-            width:"+=4"
+            backgroundColor:'red'
         },0.2*ms).animate({
-            backgroundColor:'white',
-            height:"-=4",
-            width:"-=4"
+            backgroundColor:'white'
         },0.8*ms, function(){
             
             highlightMetronome()
