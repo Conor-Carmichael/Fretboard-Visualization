@@ -30,6 +30,7 @@ body{
     background-color:#313131;
     color: white;
     margin-bottom: .5em;
+    box-shadow: 10px 10px 5px #313131;
 }
 
 h1{
@@ -41,6 +42,7 @@ h1{
 
 h2{
     margin-top:0;
+    
 }
 
 #scale-details{
@@ -141,4 +143,36 @@ h2{
     height: 22px;
     border-radius: 50%;
     background-color:white;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #313131;
+    color: white;
+    box-shadow: 10px 10px 5px white inset;
+
+}
+
+#headNavbar>div>ul>li>a{
+    font-size: 32px;
+    text-decoration: none;
+    color:white;
+    margin-bottom: 0;
+}
+
+#headNavbar>div>ul>li>a:hover{
+    color:grey;
+}
+
+#headNavbar>div>ul>li{
+    padding-left: 2em;
+    /* border-radius: 100px 100px 48px 100px; */
+    min-height: 48px;
+    /* border: 2px solid black; */
+}
+
+#headNavbar{
+    padding-top:2em;
 }
