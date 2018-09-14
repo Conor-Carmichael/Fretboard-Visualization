@@ -22,7 +22,7 @@
     float: left;
     margin: 0px 0px 0px 0px;
     padding: 0px;
-    box-shadow: 0px -10px 0px 0px rgb(219, 219, 219) inset;
+    box-shadow: -2px -8px 0px 0px rgb(219, 219, 219) inset;
 }
 
 .black{
@@ -32,6 +32,26 @@
     float: left;
     position: relative;
     margin: 0px -30px 0px -30px;
-    box-shadow: 0px -4px 0px 0px rgb(102, 102, 102) inset;
+    box-shadow: 0px -4px 0px 0px rgb(88, 88, 88) inset;
+}
 
+.whitenote{
+    margin-left: 18px;
+}   
+.note{
+    bottom: 48px;
+    position: absolute;
+    float: left;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #fa990f;
+    color: white;
+    font-size: 28px;
+    width: 42px;
+    height: 42px;
+    
+}
+
+.blacknote{
+    margin-left: 10px;
 }

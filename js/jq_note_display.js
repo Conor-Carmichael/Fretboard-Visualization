@@ -204,6 +204,11 @@ function clearBoard(){
     showing_numerals=false;
     color_counter=0;
     dehighlight();
+
+    // for piano
+
+    $('.note').animate({opacity:0});;
+
     $('#lowestring li').animate({opacity:0});
     $('#astring li').animate({opacity:0});
     $('#dstring li').animate({opacity:0});
@@ -246,12 +251,12 @@ function dehighlight(){
 //highlights specific chord red and root white
 function highlight(notes){
     for(var i=0;i<notes.length;i++){
-        if (i===0){
-            $('.'+notes[i].replace("#","sharp"+'')).css({'background':'white'});
-            $('.'+notes[i].replace("#","sharp"+'')).css({'color':'black'});
-        }else{
+        // if (i===0){
+        //     $('.'+notes[i].replace("#","sharp"+'')).css({'background':'white'});
+        //     $('.'+notes[i].replace("#","sharp"+'')).css({'color':'black'});
+        // }else{
             $('.'+notes[i].replace("#","sharp"+'')).css({'background':'#9D002C'});
-        }    
+        // }    
     }
 }
 
